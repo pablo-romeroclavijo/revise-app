@@ -43,14 +43,11 @@ class Event {
     }
     
     async delete(){
-        const query = 'DELETE FROM events WHERE event_id = $1'
+        const query = 'DELETE FROM events WHERE event_id = $1 RETURN *'
         const params = [this.eventID]
 
         const response = await db.query(query, params)
 
-        if (response.rows.length != 1){
-            throw new Error ('Unable to create event')
-        }
         return new Event(response.rows[0])
     }
 
@@ -59,7 +56,7 @@ class Event {
     static async deleteAll(userID, subjects){
         let events = []
         if(!subjects){
-            const query = 'DELETE FROM events WHERE user_id = $1'
+            const query = 'DELETE FROM events WHERE user_id = $1 RETURNING *'
             const params = [userID]
 
             const response = await db.query(query, params)
@@ -71,7 +68,7 @@ class Event {
 
         }else{
             for(i in subjects){
-                const query = 'DELETE FROM events WHERE user_id = $1 AND subject=$2'
+                const query = 'DELETE FROM events WHERE user_id = $1 AND subject=$2 RETURNING *'
                 const params = [userID, subjects[i]]
 
                 const response = await db.query(query, params)
