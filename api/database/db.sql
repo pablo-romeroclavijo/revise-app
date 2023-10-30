@@ -55,9 +55,15 @@ VALUES
 INSERT INTO events 
     (user_id, start_date, end_date, title, description, location, subject, priority)
 VALUES 
-(1, '2023-11-06 10:30:00', '2023-11-06 11:00:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
-(1, '2023-11-07 12:00:00', '2023-11-07 12:30:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
-(1, '2023-11-08 13:30:00', '2023-11-08 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L'),
-(2, '2023-11-07 12:00:00' ,'2023-11-07 12:30:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
-(2, '2023-11-08 13:00:00', '2023-11-08 13:00:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
-(2, '2023-11-09 14:00:00', '2023-11-09 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L');                                                                                                                                                                                                                                               
+    (1, '2023-11-06 10:30:00', '2023-11-06 11:00:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
+    (1, '2023-11-07 12:00:00', '2023-11-07 12:30:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
+    (1, '2023-11-08 13:30:00', '2023-11-08 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L'),
+    (2, '2023-11-07 12:00:00' ,'2023-11-07 12:30:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
+    (2, '2023-11-08 13:00:00', '2023-11-08 13:30:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
+    (2, '2023-11-09 14:00:00', '2023-11-09 14:30:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L'),
+    (1, '2023-11-13 10:30:00', '2023-11-13 11:00:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
+    (1, '2023-11-14 12:00:00', '2023-11-14 12:30:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
+    (1, '2023-11-15 13:30:00', '2023-11-15 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L'),
+    (1, '2023-11-16 12:00:00' ,'2023-11-16 12:30:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
+    (1, '2023-11-17 13:00:00', '2023-11-17 13:30:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
+    (1, '2023-11-18 14:00:00', '2023-11-18 14:30:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L');                                                                                                                                                                                                                                               
