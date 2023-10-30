@@ -1,13 +1,15 @@
 const Event = require('../models/Events')
 const Link = require('../models/Link')
+const User = require('../models/User')
 
 
 async function getAll(req, res){      //body: {user_id: <user_id>}
     try {
-        const data = req.body
-        const userID = data.user_id
+        token = req.headers["authorization"]
+        const user = await User.getOneByToken(token)
 
-        const response = await Event.getAll(userID)
+
+        const response = await Event.getAll(user.id)
         res.status(200).send(response)
     } catch (error) {
         res.status(400).json({'error': error.message})    
@@ -26,13 +28,14 @@ async function getOneById(req, res){      //dynamic paramater :id (event)
     }
 }
 
-async function create(req, res){      //body: {user_id: <user_id>, event: {date_end, date_start, description,…}}
+async function create(req, res){      //body: {date_end, date_start, description,…}
     try {
         const data = req.body
-        const userID = data.user_id
-        const event = data.event
+        token = req.headers["authorization"]
+        const user = await User.getOneByToken(token)
+        const event = data
 
-        const response = await Event.create(userID, event)
+        const response = await Event.create(user.id, event)
         res.status(201).send(response)
     } catch (error) {
         res.status(400).json({'error': error.message})    
@@ -52,13 +55,14 @@ async function destroy(req, res){        //dynamic paramater :id (event)
     }
 }
 
-async function destroyAll(req, res){     //body: {user_id: <user_id>, subject:[]}
+async function destroyAll(req, res){     //body: {subjects:[]}
     try{
-        const userID = req.body.user_id
-        const subjects = req.body.subjects
+        token = req.headers["authorization"]
+        const user = await User.getOneByToken(token)
 
-        console.log(userID, subjects)
-        const response = await Event.deleteAll(userID, subjects)
+        const subjects = req.body
+
+        const response = await Event.deleteAll(user.id, subjects)
 
         res.status(202).send(response)
     }catch(error){
@@ -69,19 +73,31 @@ async function destroyAll(req, res){     //body: {user_id: <user_id>, subject:[]
 
 async function update(req, res){
     try {
-        const userID = req.body.user_id
-        const body = req.body
-        
+        const data = req.body
+        const event = await Event.getOneById(data.event_id)
+
+        const response = await event.update(data)
+        res.status(200).send(response)
     } catch (error) {
-        
+        res.status(400).json({'error': error.message}) 
     }
+}
 
+async function updateTime(req, res){
+    try {
+        const data = req.body
+        const event = await Event.getOneById(data.event_id)
 
-
+        const response = await event.updateTime(data)
+        res.status(200).send(response)
+    } catch (error) {
+        res.status(400).json({'error': error.message}) 
+    }
 }
 
 
-module.exports = { getAll, getOneById, create, destroy, destroyAll }
+
+module.exports = { getAll, getOneById, create, destroy, destroyAll, update, updateTime }
 
 
 
@@ -90,7 +106,7 @@ module.exports = { getAll, getOneById, create, destroy, destroyAll }
 
 //eventRouter.post('/', eventController.create)
 
-//eventRouter.patch('/:id', eventController.update)
+//eventRouter.patch('/', eventController.update)
 //eventRouter.patch('time/:id', eventController.updateTime)
 
 // eventRouter.delete('/:id', eventController.destroy)
