@@ -21,8 +21,8 @@ CREATE TABLE "share_links"(
 CREATE TABLE "events"(
     "event_id" INTEGER GENERATED ALWAYS AS IDENTITY,
     "user_id" INTEGER,
-    "start_date" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    "end_date" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "start_date" TIMESTAMP NOT NULL,
+    "end_date" TIMESTAMP NOT NULL,
     "title" VARCHAR(60) NOT NULL,
     "description" VARCHAR(350) NULL,
     "location" VARCHAR(50) NULL,
