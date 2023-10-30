@@ -5,3 +5,5 @@ const linkRouter = Router()
 
 
 //linkRouter.get('/', linkController.getURL)
+
+module.exports = linkRouter
