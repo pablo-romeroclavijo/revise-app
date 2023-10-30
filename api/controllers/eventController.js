@@ -42,7 +42,7 @@ async function create(req, res){      //body: {user_id: <user_id>, event: {date_
 async function destroy(req, res){        //dynamic paramater :id (event)
     try{
         const eventID = req.params.id
-        const event = await getOneById(eventID)
+        const event = await Event.getOneById(eventID)
         const response =  await event.delete()
         res.status(204).send(response)
 
