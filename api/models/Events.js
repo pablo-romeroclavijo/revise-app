@@ -3,10 +3,10 @@ const db = require('../database/connect')
 
 class Event {
     constructor ({event_id, user_id, start_date, end_date, title, description, location, subject, priority}){
-        this.eventID = event_id
-        this.userID = user_id
-        this.startDate = start_date
-        this.endDate = end_date
+        this.event_id = event_id
+        this.user_id = user_id
+        this.start_date = start_date
+        this.end_date = end_date
         this.title = title
         this.description = description
         this.location = location
@@ -33,7 +33,7 @@ class Event {
 
     static async create(userID, event){
         const query = 'INSERT INTO events (user_id, start_date, end_date, title, description, location, subject, priority) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
-        const params = [userID, event.date_start, event.date_end, event.title, event.description, event.location, event.subject, event.priority ]
+        const params = [userID, event.start_date, event.end_date, event.title, event.description, event.location, event.subject, event.priority ]
         const response = await db.query(query, params)
 
         if (response.rows.length != 1){
@@ -43,10 +43,11 @@ class Event {
     }
     
     async delete(){
-        const query = 'DELETE FROM events WHERE event_id = $1 RETURN *'
-        const params = [this.eventID]
+        const query = 'DELETE FROM events WHERE event_id = $1 RETURNING *'
+        const params = [this.event_id]
 
         const response = await db.query(query, params)
+        console.log(response.rows)
 
         return new Event(response.rows[0])
     }
@@ -55,11 +56,13 @@ class Event {
 
     static async deleteAll(userID, subjects){
         let events = []
-        if(!subjects){
+        if(subjects.length == 0){
+            console.log('no subjects')
             const query = 'DELETE FROM events WHERE user_id = $1 RETURNING *'
             const params = [userID]
 
             const response = await db.query(query, params)
+            console.log(response.rows)
 
             if (response.rows.length < 1){
                 throw new Error ('Unable to delete events')
@@ -67,13 +70,15 @@ class Event {
             response.rows.map(event => events.push(new Event(event)))
 
         }else{
-            for(i in subjects){
+            console.log('there are subjects')
+            for(let i in subjects){
+                console.log(subjects[i])
                 const query = 'DELETE FROM events WHERE user_id = $1 AND subject=$2 RETURNING *'
                 const params = [userID, subjects[i]]
 
                 const response = await db.query(query, params)
-
-                if (response.rows.length != 1){
+    
+                if (response.rows.length < 1){
                     throw new Error ('Unable to delete events')
                     }
                 response.rows.map(event => events.push(new Event(event)))

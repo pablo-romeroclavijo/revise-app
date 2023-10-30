@@ -42,12 +42,13 @@ async function create(req, res){      //body: {user_id: <user_id>, event: {date_
 async function destroy(req, res){        //dynamic paramater :id (event)
     try{
         const eventID = req.params.id
-        const event = await getOneById(eventID)
+        const event = await Event.getOneById(eventID)
         const response =  await event.delete()
-        res.status(204).send(response)
+        console.log('response', response)
+        res.status(202).send(response)
 
     }catch(error){
-        res.status(404).json({'error': error.message}) 
+        res.status(400).json({'error': error.message}) 
     }
 }
 
@@ -55,12 +56,27 @@ async function destroyAll(req, res){     //body: {user_id: <user_id>, subject:[]
     try{
         const userID = req.body.user_id
         const subjects = req.body.subjects
+
+        console.log(userID, subjects)
         const response = await Event.deleteAll(userID, subjects)
 
-        res.status(204).send(response)
+        res.status(202).send(response)
     }catch(error){
-        res.status(404).json({'error': error.message}) 
+        res.status(400).json({'error': error.message}) 
     }
+
+}
+
+async function update(req, res){
+    try {
+        const userID = req.body.user_id
+        const body = req.body
+        
+    } catch (error) {
+        
+    }
+
+
 
 }
 
