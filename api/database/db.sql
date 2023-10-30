@@ -21,8 +21,8 @@ CREATE TABLE "share_links"(
 CREATE TABLE "events"(
     "event_id" INTEGER GENERATED ALWAYS AS IDENTITY,
     "user_id" INTEGER,
-    "start_date" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-    "end_date" TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "start_date" TIMESTAMP NOT NULL,
+    "end_date" TIMESTAMP NOT NULL,
     "title" VARCHAR(60) NOT NULL,
     "description" VARCHAR(350) NULL,
     "location" VARCHAR(50) NULL,
@@ -51,13 +51,13 @@ VALUES
     ('user3@example.com', 'user3', 'Elementary School');
 
 
--- -- Populate the "events" table
--- INSERT INTO events 
---     (user_id, start_date, end_date, title, description, location, subject, priority)
--- VALUES 
---     (1, '2023-11-06 10:30:00', '2023-11-06 11-00-00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
---     (1, '2023-11-07 12:00:00', '2023-11-07 12:30:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
---     (1, '2023-11-08 13:30:00', '2023-11-08 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L'),
---     (2, '2023-11-07 12:00:00' ,'2023-11-07 12:30:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
---     (2, '2023-11-08 13:00:00', '2023-11-08 13:00:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
---     (2, '2023-11-09 14:00:00', '2023-11-09 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L');                                                                                                                                                                                                                                               
+-- Populate the "events" table
+INSERT INTO events 
+    (user_id, start_date, end_date, title, description, location, subject, priority)
+VALUES 
+(1, '2023-11-06 10:30:00', '2023-11-06 11:00:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
+(1, '2023-11-07 12:00:00', '2023-11-07 12:30:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
+(1, '2023-11-08 13:30:00', '2023-11-08 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L'),
+(2, '2023-11-07 12:00:00' ,'2023-11-07 12:30:00', 'Meeting', 'Discuss project progress', 'Meeting Room 1', 'Poject', 'H'),
+(2, '2023-11-08 13:00:00', '2023-11-08 13:00:00', 'Lecture', 'Introduction to History', 'Room 101', 'History', 'M'),
+(2, '2023-11-09 14:00:00', '2023-11-09 14:00:00', 'Workshop', 'Hands-on coding workshop', 'Lab 3', 'Computer Science', 'L');                                                                                                                                                                                                                                               
