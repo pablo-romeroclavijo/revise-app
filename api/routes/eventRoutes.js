@@ -9,8 +9,8 @@ eventRouter.get('/:id', eventController.getOneById)
 
 eventRouter.post('/', eventController.create)
 
-//eventRouter.patch('/:id', eventController.update)
-//eventRouter.patch('time/:id', eventController.updateTime)
+eventRouter.patch('/', eventController.update)
+eventRouter.patch('/time', eventController.updateTime)
 
 eventRouter.delete('/:id', eventController.destroy)
 eventRouter.delete('/', eventController.destroyAll)
