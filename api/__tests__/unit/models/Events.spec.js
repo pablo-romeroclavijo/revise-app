@@ -121,25 +121,46 @@ describe('Events',() => {
         });
 
         it("throw error when unsucessfull",  async() => {
-            jest.spyOn(db, "query").mockResolvedValueOnce({rows: []})
+            const newEventData = {
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+                
+            }
+            jest.spyOn(db, 'query').mockRejectedValue(new Error('oh no'))
 
+            jest.spyOn(db, 'query')
+              .mockResolvedValueOnce({ rows: [] })
+      
             try{
-                await Event.create()
+                await Event.create(5, newEventData)
             }catch(err){
                 expect(err).toBeDefined()
-                //expect(err.message).toBe("Cannot read properties of undefined (reading 'start_date')" )
+                expect(err.message).toBe("Unable to create event" )
             }
         })
     })
 
     describe('Delete', ()=> {
-        it.skip("delete one event when sucessfull",  async() => {
+        it("delete one event when sucessfull",  async() => {
             const event = new Event({
-            event_id : 2
+                event_id: 2,
+                user_id: 4,
+                start_dat: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
             })
         
-            jest.spyOn(db, "query").mockResolvedValueOnce({         
-                  
+            jest.spyOn(db, "query").mockResolvedValueOnce({
+                rows: [{         
                     event_id: 2,
                     user_id: 4,
                     start_date: '2023-11-06 10:30:00',
@@ -149,12 +170,12 @@ describe('Events',() => {
                     location: 'Meeting Room 1', 
                     subject: 'Poject', 
                     priority: 'H'
-                  
-              });
+                    }]
+                });
               //not static so need an instance
               console.log(event)
               const deletedUser = await event.delete();
-             // expect(deletedUser).toBeInstanceOf(Event); // Check if it's an instance of the Skill class.
+              expect(deletedUser).toBeInstanceOf(Event); // Check if it's an instance of the Skill class.
               //expect(deletedUser.user_id).toBe(2);
               
         })
