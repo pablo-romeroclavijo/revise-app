@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { v4 as uuid } from 'uuid';
+import {EventCard} from '../index'
 
 export default function Timetable({ events, setEvents }) {
   const calendarRef = useRef(null);
@@ -33,19 +34,15 @@ export default function Timetable({ events, setEvents }) {
         return event;
       });
       setEvents(updatedEvents);
-    };
-
+    }
     const handleViewChange = (viewInfo) => {
       const currentView = viewInfo.view.type;
-
       if (currentView === 'dayGridMonth') {
-        
         const updatedEvents = events.filter((event) => {
           return (
             event.start >= viewInfo.start && event.end <= viewInfo.end
           );
         });
-
         setEvents(updatedEvents);
       }
     };
@@ -107,6 +104,7 @@ export default function Timetable({ events, setEvents }) {
           start: 'today prev next',
           end: 'dayGridMonth timeGridWeek,timeGridDay',
         }}
+        eventContent={(info) => <EventCard info={info} />}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         views={['dayGridMonth', 'timeGridWeek', 'timeGridDay']}
       />
