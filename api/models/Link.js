@@ -1,5 +1,5 @@
 const db = require('../database/connect')
-const deployURL = 'http://localhost:3000'
+const deployURL = 'https://revise-app.onrender.com'
 
 class Link {
     constructor({link_id, user_id, url}){
