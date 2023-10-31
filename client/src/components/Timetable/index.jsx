@@ -8,7 +8,6 @@ import {EventCard} from '../index'
 
 export default function Timetable({ events, setEvents }) {
   const calendarRef = useRef(null);
-  let idCounter = 1;
   const handleSubmit = (eventName, start, end) => {
     setEvents([
       ...events,

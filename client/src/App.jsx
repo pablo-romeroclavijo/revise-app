@@ -1,12 +1,19 @@
 import React, {useState} from 'react';
 import "./App.css";
 import { Routes, Route } from 'react-router-dom';
-import {Timetable} from './components';
+import {TimetablePage, LoginPage, NotFoundPage} from './pages'
 const App = () => {
-  const [events, setEvents] = useState([]);
   return(
   <>
-    <Timetable events={events} setEvents={setEvents} />
+    
+
+    <Routes>
+      <Route path="/">
+        <Route path="/" element={<LoginPage />}/>
+        <Route path="/timetable" element={<TimetablePage />}/>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   </>
   )
 };
