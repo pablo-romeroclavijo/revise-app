@@ -194,7 +194,7 @@ describe('Events',() => {
                     location: 'Meeting Room 1', 
                     subject: 'Poject', 
                     priority: 'H' })
-                await event.destroy()
+                await event.delete()
             } catch (err) {
                 console.log(err)
                 expect(err).toBeTruthy()
