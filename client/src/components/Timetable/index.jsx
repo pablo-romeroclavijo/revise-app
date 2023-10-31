@@ -11,7 +11,7 @@ function Timetable() {
   
   useEffect(() => {
     fetchEvents();
-  }, [events]);
+  }, []);
   const apiUrl = "https://revise-app.onrender.com"
   async function fetchEvents() {
     const options = {
@@ -81,6 +81,7 @@ function Timetable() {
     const response = await fetch(apiUrl + '/event', options);
 
   if (response.status === 201) {
+    await fetchEvents();
     // Handle success, maybe refresh events or perform other actions
   } else {
     alert('Unable to post events');
@@ -192,6 +193,7 @@ function Timetable() {
       // Handle successful deletion
       const updatedEvents = events.filter(event => event.id !== eventId);
       setEvents(updatedEvents);
+      await fetchEvents();
     } else {
       alert('Unable to delete event');
     }
