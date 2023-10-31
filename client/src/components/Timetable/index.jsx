@@ -8,7 +8,7 @@ import {EventCard} from '../index'
 
 export default function Timetable({ events, setEvents }) {
   const calendarRef = useRef(null);
-
+  let idCounter = 1;
   const handleSubmit = (eventName, start, end) => {
     setEvents([
       ...events,
@@ -47,10 +47,11 @@ export default function Timetable({ events, setEvents }) {
       }
     };
 
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.on('eventDrop', handleEventChange);
-    calendarApi.on('eventResize', handleEventChange);
-    calendarApi.on('viewDidMount', handleViewChange);
+    if (calendarRef.current) {
+      
+      calendarRef.current.getApi().on('eventDrop', handleEventChange);
+      calendarRef.current.getApi().on('view', handleViewChange);
+    }
   }, [events]);
 
   const handleSelect = (info) => {
@@ -104,7 +105,7 @@ export default function Timetable({ events, setEvents }) {
           start: 'today prev next',
           end: 'dayGridMonth timeGridWeek,timeGridDay',
         }}
-        eventContent={(info) => <EventCard info={info} />}
+        eventContent={(info) => <EventCard info={info} events={events} setEvents={setEvents}/>}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         views={['dayGridMonth', 'timeGridWeek', 'timeGridDay']}
       />
