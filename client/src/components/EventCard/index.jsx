@@ -9,7 +9,8 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
   const end = new Date(eventInfo.extendedProps.end_date);
 
   const handleEdit = () => {
-    setIsEditing(true);
+   setIsEditing(true);
+    
   };
 
   const handleSave = () => {

@@ -11,7 +11,7 @@ function Timetable() {
   
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [events]);
   const apiUrl = "https://revise-app.onrender.com"
   async function fetchEvents() {
     const options = {
