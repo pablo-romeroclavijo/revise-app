@@ -32,8 +32,8 @@ class Event {
     }
 
     static async create(userID, event){
+        console.log('event', event)
         const query = 'INSERT INTO events (user_id, start_date, end_date, title, description, location, subject, priority) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
-        console.log(event, userID)
         const params = [userID, event.start_date, event.end_date, event.title, event.description, event.location, event.subject, event.priority ]
         const response = await db.query(query, params)
 
@@ -48,7 +48,7 @@ class Event {
         const params = [this.event_id]
 
         const response = await db.query(query, params)
-        console.log(response.rows)
+        console.log(response)
 
         return new Event(response.rows[0])
     }
@@ -73,14 +73,12 @@ class Event {
         }else{
             console.log('there are subjects')
             for(let i in subjects){
-                console.log(subjects[i])
                 const query = 'DELETE FROM events WHERE user_id = $1 AND subject=$2 RETURNING *'
                 const params = [userID, subjects[i]]
-                console.log(params)
 
                 const response = await db.query(query, params)
     
-                if (response.rows.length < 1){
+                if (response.rows.length == 0){
                     throw new Error ('Unable to delete events')
                     }
                 response.rows.map(event => events.push(new Event(event)))
