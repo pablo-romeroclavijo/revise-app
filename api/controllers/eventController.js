@@ -58,9 +58,13 @@ async function destroy(req, res){        //dynamic paramater :id (event)
 async function destroyAll(req, res){     //body: {subjects:[]}
     try{
         token = req.headers["authorization"]
+        console.log("ok")
+
         const user = await User.getOneByToken(token)
+        console.log("ok")
 
         const subjects = req.body.subjects
+        console.log(subjects)
 
         const response = await Event.deleteAll(user.id, subjects)
 
@@ -86,8 +90,9 @@ async function update(req, res){
 async function updateTime(req, res){
     try {
         const data = req.body
+        console.log(data)
         const event = await Event.getOneById(data.event_id)
-
+        console.log(event)
         const response = await event.updateTime(data)
         res.status(200).send(response)
     } catch (error) {

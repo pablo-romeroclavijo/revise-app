@@ -206,6 +206,7 @@ describe('eventController',() => {
         expect(mockStatus).toHaveBeenCalledWith(202)
         expect(mockSend).toHaveBeenCalledWith(testEvent)
         })
+
         it('it send error code 400 and error when it destroy fail', async () => {
       
             jest.spyOn(Event, 'create')
@@ -220,14 +221,7 @@ describe('eventController',() => {
     })
     
     describe('destroyAll', ()=>{
-        beforeEach(() => {
-            mockUser = { 
-                user_id : 4
-            }
-            mockReq = {
-                headers : {"authorization": "5f6d8c90-5536-4a4a-b952-26077f6893a6"},
-            }
-        })
+        
         it('successfully delete all event of a user and displays the 200 status code' , async () => {
             const testEvent = [
                     {
@@ -264,34 +258,42 @@ describe('eventController',() => {
                         priority: 'H'
                     },
             ]
+            const mockUser = { user_id : 4}
+            const mockReq = {
+                headers : {"authorization": "5f6d8c90-5536-4a4a-b952-26077f6893a6"},
+                body: {subjects : []}
+            }
+            jest.spyOn(User, 'getOneByToken')
+                .mockResolvedValue(mockUser)
         
-        jest.spyOn(Event, 'getOneById')
-            .mockResolvedValue(testEvent)
-    
-        jest.spyOn(Event, 'deleteAll')
-            .mockResolvedValue(testEvent)
-        
-        await eventController.destroyAll(mockReq,mockRes)
-        
-        expect(User.getOneByToken).toHaveBeenCalledTimes(1)
-        expect(Event.deleteAll).toHaveBeenCalledTimes(1)
-        expect(mockStatus).toHaveBeenCalledWith(202)
-        expect(mockSend).toHaveBeenCalledWith(testEvent)
+            jest.spyOn(Event, 'deleteAll')
+                .mockResolvedValue(testEvent)
+            
+            await eventController.destroyAll(mockReq, mockRes)
+            
+            expect(User.getOneByToken).toHaveBeenCalledTimes(1)
+            expect(Event.deleteAll).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(202)
+            expect(mockSend).toHaveBeenCalledWith(testEvent)
         })
         it("send error gets when it fails and 400 status error", async () => {
-            
+            const mockUser = { user_id : 4}
+                const mockReq = {
+                    headers : {"authorization": "5f6d8c90-5536-4a4a-b952-26077f6893a6"},
+                    body: {subjects : []}
+                }
             jest.spyOn(User, "getOneByToken")
                  .mockResolvedValue(mockUser);
             jest.spyOn(Event, "deleteAll")
-                .mockRejectedValue(new Error('Something happened to your api'));
-
-
+                .mockRejectedValue(new Error("Cannot read properties of undefined (reading 'subjects')"));
+            
+                
             await eventController.destroyAll(mockReq, mockRes);
             // Expectations
-            //expect(User.getOneById).toHaveBeenCalledTimes(1)
-            //expect(Event.getAll).toHaveBeenCalledTimes(1)
+            expect(User.getOneByToken).toHaveBeenCalledTimes(1)
+            expect(Event.deleteAll).toHaveBeenCalledTimes(1)
             expect(mockStatus).toHaveBeenCalledWith(400); // Should set status code to 400
-            expect(mockJson).toHaveBeenCalledWith({error:"Something happened to your api"});
+            expect(mockJson).toHaveBeenCalledWith({error:"Cannot read properties of undefined (reading 'subjects')"});
           });
     })
     describe('update', ()=> {
@@ -340,7 +342,15 @@ describe('eventController',() => {
             expect(Event.getOneById).toHaveBeenCalledTimes(1)
             expect(Event.prototype.update).toHaveBeenCalledTimes(1)
             expect(mockStatus).toHaveBeenCalledWith(200); // Should set status code to 400
-            expect(mockSend).toHaveBeenCalledWith({...new Event(testEvent), 
+            expect(mockSend).toHaveBeenCalledWith(new Event({
+                event_id: 3,
+                user_id: 4,
+                start_date: '2023-iu11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Project work',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
                 start_date: '2023-iu11-06 10:30:00',
                 end_date : '2023-11-06 11:00:00', 
                 title : 'Project work',
@@ -348,7 +358,7 @@ describe('eventController',() => {
                 location: 'Meeting Room 1', 
                 subject: 'Poject', 
                 priority: 'M'  
-            });
+            }));
           });
 
           it("send error gets when it fails and 400 status error", async () => {
@@ -390,31 +400,81 @@ describe('eventController',() => {
           });
     })
     
-    describe.skip('updateTime', ()=>{
-        it("successfully delete all event of a user and displays the 200 status code", async () => {
-            
+    describe('updateTime', ()=>{
+        it("successfully update Time of event and displays the 200 status code", async () => {
+            const testEvent = {
+                event_id: 3,
+                user_id: 4,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+            }
+            const mockReq = {
+                body: { 
+                        event_id: 3,
+                        start_date: '2023-11-06 14:30:00',
+                        end_date : '2023-11-06 13:00:00', 
+                        
+                }
+            }
             jest.spyOn(Event, "getOneById")
                  .mockResolvedValue(new Event(testEvent));
-            jest.spyOn(Event.prototype, "update")
-                .mockRejectedValue(new Error('Something happened to your api'));
+            jest.spyOn(Event.prototype, "updateTime")
+                .mockResolvedValue({ ...new Event(testEvent), 
+                    start_date: '2023-11-06 14:30:00',
+                    end_date : '2023-11-06 13:00:00',
+                    });
 
 
-            await eventController.update(mockReq, mockRes);
+            await eventController.updateTime(mockReq, mockRes);
             // Expectations
-            //expect(User.getOneById).toHaveBeenCalledTimes(1)
-            //expect(Event.getAll).toHaveBeenCalledTimes(1)
-            expect(mockStatus).toHaveBeenCalledWith(400); // Should set status code to 400
-            expect(mockJson).toHaveBeenCalledWith({error:"Something happened to your api"});
-          });
-          it("send error gets when it fails and 400 status error", async () => {
+            expect(Event.getOneById).toHaveBeenCalledTimes(1)
+            expect(Event.prototype.updateTime).toHaveBeenCalledTimes(1)
+            expect(mockStatus).toHaveBeenCalledWith(200); 
+            expect(mockSend).toHaveBeenCalledWith(new Event({
+                event_id: 3,
+                user_id: 4,
+                start_date: '2023-11-06 14:30:00',
+                end_date : '2023-11-06 13:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'}));
             
-            jest.spyOn(User, "getOneByToken")
-                 .mockResolvedValue(mockUser);
-            jest.spyOn(Event, "deleteAll")
+          });
+
+          it("send error gets when it fails and 400 status error", async () => {
+            const testEvent = {
+                event_id: 3,
+                user_id: 4,
+                start_date: '2023-iu11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+            }
+            const mockReq = {
+                body: { 
+                        event_id: 3,
+                        start_date: '2023-iu11-06 14:30:00',
+                        end_date : '2023-11-06 13:00:00', 
+                        
+                }
+            }
+            jest.spyOn(Event, "getOneById")
+                 .mockResolvedValue(new Event(testEvent));
+            jest.spyOn(Event.prototype, "updateTime")
                 .mockRejectedValue(new Error('Something happened to your api'));
 
 
-            await eventController.destroyAll(mockReq, mockRes);
+            await eventController.updateTime(mockReq, mockRes);
             // Expectations
             //expect(User.getOneById).toHaveBeenCalledTimes(1)
             //expect(Event.getAll).toHaveBeenCalledTimes(1)
