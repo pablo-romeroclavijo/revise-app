@@ -208,15 +208,31 @@ describe('eventController',() => {
         })
 
         it('it send error code 400 and error when it destroy fail', async () => {
-      
-            jest.spyOn(Event, 'create')
-              .mockRejectedValue( new Error("Cannot read properties of undefined (reading 'id')"))
+            const testEvent = {
+                event_id: 1,
+                user_id: 4,
+                start_date: '2023-iu11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+            }
+            const mockReq = {
+                params : {event_id: 1 }
+            }
+
+            jest.spyOn(Event, 'getOneById')
+                .mockResolvedValue(new Event(testEvent))
+            jest.spyOn(Event.prototype, 'delete')
+              .mockRejectedValue( new Error("Cannot find the user"))
       
             await eventController.destroy(mockReq, mockRes)
 
-            
+
             expect(mockStatus).toHaveBeenCalledWith(400)
-            expect(mockJson).toHaveBeenCalledWith({error: "Cannot read properties of undefined (reading 'id')"})
+            expect(mockJson).toHaveBeenCalledWith({error: "Cannot find the user"})
         })
     })
     
@@ -285,7 +301,7 @@ describe('eventController',() => {
             jest.spyOn(User, "getOneByToken")
                  .mockResolvedValue(mockUser);
             jest.spyOn(Event, "deleteAll")
-                .mockRejectedValue(new Error("Cannot read properties of undefined (reading 'subjects')"));
+                .mockRejectedValue(new Error("Cannot Delete"));
             
                 
             await eventController.destroyAll(mockReq, mockRes);
@@ -293,7 +309,7 @@ describe('eventController',() => {
             expect(User.getOneByToken).toHaveBeenCalledTimes(1)
             expect(Event.deleteAll).toHaveBeenCalledTimes(1)
             expect(mockStatus).toHaveBeenCalledWith(400); // Should set status code to 400
-            expect(mockJson).toHaveBeenCalledWith({error:"Cannot read properties of undefined (reading 'subjects')"});
+            expect(mockJson).toHaveBeenCalledWith({error : "Cannot Delete"});
           });
     })
     describe('update', ()=> {
