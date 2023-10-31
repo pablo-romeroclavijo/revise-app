@@ -5,15 +5,16 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { v4 as uuid } from 'uuid';
 import {EventCard} from '../index'
+const apiUrl = "https://revise-app.onrender.com"
 
 export default function Timetable({ events, setEvents }) {
   const calendarRef = useRef(null);
-  const handleSubmit = (eventName, start, end) => {
+  const handleSubmit = (eventName, start_date, end_date) => {
     setEvents([
       ...events,
       {
-        start,
-        end,
+        start_date,
+        end_date,
         title: eventName,
         id: uuid(),
       },
@@ -26,8 +27,8 @@ export default function Timetable({ events, setEvents }) {
         if (event.id === eventInfo.event.id) {
           return {
             ...event,
-            start: eventInfo.event.start,
-            end: eventInfo.event.end,
+            start_date: eventInfo.event.start,
+            end_date: eventInfo.event.end
           };
         }
         return event;
