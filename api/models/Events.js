@@ -48,7 +48,7 @@ class Event {
         const params = [this.event_id]
 
         const response = await db.query(query, params)
-        console.log(response.rows)
+        console.log(response)
 
         return new Event(response.rows[0])
     }

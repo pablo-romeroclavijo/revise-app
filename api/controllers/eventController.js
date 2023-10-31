@@ -3,7 +3,7 @@ const Link = require('../models/Link')
 const User = require('../models/User')
 
 
-async function getAll(req, res){      //body: {user_id: <user_id>}
+async function getAll(req, res){      //header: {auth: <user_token>}
     try {
         token = req.headers["authorization"]
         const user = await User.getOneByToken(token)
