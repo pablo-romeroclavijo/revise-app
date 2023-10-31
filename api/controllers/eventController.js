@@ -110,4 +110,3 @@ module.exports = { getAll, getOneById, create, destroy, destroyAll, update, upda
 //eventRouter.patch('time/:id', eventController.updateTime)
 
 // eventRouter.delete('/:id', eventController.destroy)
-// eventRouter.delete('/', eventController.destroyAll)
