@@ -30,10 +30,10 @@ async function getOneById(req, res){      //dynamic paramater :id (event)
 
 async function create(req, res){      //body: {date_end, date_start, description,…}
     try {
-        const data = req.body
+        const event = req.body
         token = req.headers["authorization"]
         const user = await User.getOneByToken(token)
-        const event = data
+        
 
         const response = await Event.create(user.id, event)
         res.status(201).send(response)
@@ -60,7 +60,7 @@ async function destroyAll(req, res){     //body: {subjects:[]}
         token = req.headers["authorization"]
         const user = await User.getOneByToken(token)
 
-        const subjects = req.body
+        const subjects = req.body.subjects
 
         const response = await Event.deleteAll(user.id, subjects)
 
