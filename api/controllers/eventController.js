@@ -3,7 +3,7 @@ const Link = require('../models/Link')
 const User = require('../models/User')
 
 
-async function getAll(req, res){      //header: {auth: <user_token>}
+async function getAll(req, res){      //body: {user_id: <user_id>}
     try {
         token = req.headers["authorization"]
         const user = await User.getOneByToken(token)
@@ -30,10 +30,10 @@ async function getOneById(req, res){      //dynamic paramater :id (event)
 
 async function create(req, res){      //body: {date_end, date_start, description,…}
     try {
-        const event = req.body
+        const data = req.body
         token = req.headers["authorization"]
         const user = await User.getOneByToken(token)
-        
+        const event = data
 
         const response = await Event.create(user.id, event)
         res.status(201).send(response)
@@ -58,13 +58,9 @@ async function destroy(req, res){        //dynamic paramater :id (event)
 async function destroyAll(req, res){     //body: {subjects:[]}
     try{
         token = req.headers["authorization"]
-        console.log("ok")
-
         const user = await User.getOneByToken(token)
-        console.log("ok")
 
-        const subjects = req.body.subjects
-        console.log(subjects)
+        const subjects = req.body
 
         const response = await Event.deleteAll(user.id, subjects)
 
@@ -90,9 +86,9 @@ async function update(req, res){
 async function updateTime(req, res){
     try {
         const data = req.body
-        console.log(data)
+        
         const event = await Event.getOneById(data.event_id)
-        console.log(event)
+
         const response = await event.updateTime(data)
         res.status(200).send(response)
     } catch (error) {
