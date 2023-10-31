@@ -48,15 +48,6 @@ CREATE TABLE token (
 );
 
 
--- ALTER TABLE
---     "events" ADD PRIMARY KEY("event_id");
--- ALTER TABLE
---     "share_links" ADD PRIMARY KEY("link_id");
--- -- ALTER TABLE
--- --     "share_links" ADD CONSTRAINT "share_links_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("user_id");
--- ALTER TABLE
---     "events" ADD CONSTRAINT "events_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("user_id");
-
 
 
 -- Populate the "users" table
