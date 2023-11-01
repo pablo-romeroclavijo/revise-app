@@ -3,15 +3,26 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+
+
 import { v4 as uuid } from 'uuid';
-import {EventCard} from '../index'
+import {EventCard, FilterTheme} from '../index'
+
+import { Theme } from '@fullcalendar/core/internal';
+
+
 const apiUrl = "https://revise-app.onrender.com"
+
+
 function Timetable() {
   const [events, setEvents] = useState([]);
+  const [theme, setTheme] = useState('default')
   
   useEffect(() => {
     fetchEvents();
-  }, [events]);
+  }, []);
+
   const apiUrl = "https://revise-app.onrender.com"
   async function fetchEvents() {
     const options = {
@@ -226,8 +237,31 @@ function Timetable() {
     }
   }
   console.log(events)
+
+
+
+let themeImport
+const themes = {
+  default:'default',
+  theme1: 'theme1',
+  theme2:'theme2',
+  theme3: 'theme3'
+}
+
+useEffect( ()=>{
+  const style = document.getElementsByTagName('style')
+  console.log(style)
+  async function changeTheme(){
+    console.log(theme)
+    themeImport = await import (`../../themes/${themes[theme]}.css`)
+  }
+  changeTheme()
+},[theme])
+
+
   return (
     <div>
+      <FilterTheme theme = {theme} setTheme = {setTheme}/>
       <FullCalendar
         editable
         selectable
@@ -236,7 +270,7 @@ function Timetable() {
         events={events}
         headerToolbar={{
           start: 'today prev next',
-          end: 'dayGridMonth timeGridWeek,timeGridDay',
+          end: 'dayGridMonth timeGridWeek timeGridDay',
         }}
         initialView="dayGridMonth"
         eventContent={({ event }) => (
@@ -246,7 +280,8 @@ function Timetable() {
             onEdit={update}
           />
         )}
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, bootstrap5Plugin]}
+        themeSystem='default'
         views={['dayGridMonth', 'timeGridWeek', 'timeGridDay']}
       />
     </div>

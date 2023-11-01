@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Timetable } from '../../components';
+import { Timetable, FilterTheme } from '../../components';
 import { useNavigate } from 'react-router-dom';
 
 const apiUrl = "https://revise-app.onrender.com"
@@ -19,6 +19,7 @@ const TimetablePage = () => {
 console.log(events)
   return (
     <>
+
       <Timetable events={events} setEvents={setEvents} />
     </>
   );
