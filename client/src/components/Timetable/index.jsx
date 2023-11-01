@@ -88,19 +88,59 @@ function Timetable() {
   }
 };
 
+
+
+async function updateTime(event){    //event = {event_id, end_date, start_date}
+  const options  = {
+    method: "PATCH",
+    headers : {
+      "Accept": 'application/json',
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(event)
+  }
+
+  const response = await fetch(apiUrl +'/event/time', options)
+  const data = await response.json()
+  if(response.status == 200){
+    //console.log("yhyhyh", data);
+    // setEvents(data);
+    // await fetchEvents();
+  }else{
+    alert('Unable to delete events')
+  }
+}
+
+// updateTime({
+//   event_id: event.event_id,
+//   start_date: start,
+//   end_date: end
+// });
+
+
   useEffect(() => {
     const handleEventChange = (eventInfo) => {
       const updatedEvents = events.map((event) => {
-        if (event.id === eventInfo.event.id) {
-          return {
-            ...event,
-            start: eventInfo.event.start,
-            end: eventInfo.event.end
-          };
+        if (event.event_id === eventInfo.event.extendedProps.event_id) {
+          // Update the event's start and end dates
+          event.start = eventInfo.event.extendedProps.start_date;
+          event.end = eventInfo.event.extendedProps.end_date;
+          console.log("awwaawaw", event.start, event.end);
+    
+          // Call updateTime with the updated event data
+          updateTime({
+            event_id: event.event_id,
+            start_date: event.start, // Use the updated start date
+            end_date: event.end,     // Use the updated end date
+          });
         }
+    
         return event;
       });
       setEvents(updatedEvents);
+
+      console.log("asdasdasdasd", updatedEvents);
+      
     }
     const handleViewChange = (viewInfo) => {
       const currentView = viewInfo.view.type;
@@ -114,11 +154,11 @@ function Timetable() {
       }
     };
 
-    if (calendarRef.current) {
+    
       
-      calendarRef.current.getApi().on('eventDrop', handleEventChange);
-      calendarRef.current.getApi().on('view', handleViewChange);
-    }
+    calendarRef.current.getApi().on('eventDrop', handleEventChange);
+    calendarRef.current.getApi().on('view', handleViewChange);
+    
   }, [events]);
 
   const handleSelect = (info) => {
