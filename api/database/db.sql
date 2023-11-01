@@ -1,21 +1,26 @@
 DROP TABLE IF EXISTS "users" CASCADE;
 DROP TABLE IF EXISTS "events" CASCADE;
 DROP TABLE IF EXISTS "share_links" CASCADE;
-
+DROP TABLE IF EXISTS "token" CASCADE;
 
 CREATE TABLE "users"(
     "user_id" INTEGER GENERATED ALWAYS AS IDENTITY,
     "email" VARCHAR(50) NOT NULL,
-    "username" VARCHAR(25) NOT NULL,
-    "school_level" VARCHAR(25) NOT NULL
+    "username" VARCHAR(25) UNIQUE NOT NULL,
+    "school_level" VARCHAR(25),
+    "password" CHAR(60),
+
+    PRIMARY KEY (user_id)
+  
 );
-ALTER TABLE
-    "users" ADD PRIMARY KEY("user_id");
 
 CREATE TABLE "share_links"(
     "link_id" INTEGER GENERATED ALWAYS AS IDENTITY,
     "url" VARCHAR(150),
-    "user_id" INTEGER
+    "user_id" INTEGER,
+
+    PRIMARY KEY (link_id),
+    FOREIGN KEY (user_id) REFERENCES users("user_id")
 );
 
 CREATE TABLE "events"(
@@ -27,18 +32,21 @@ CREATE TABLE "events"(
     "description" VARCHAR(350) NULL,
     "location" VARCHAR(50) NULL,
     "subject" VARCHAR(20) NOT NULL,
-    "priority" CHAR(1) NULL
+    "priority" CHAR(1) NULL,
+
+    PRIMARY KEY (event_id), 
+    FOREIGN KEY (user_id) REFERENCES users("user_id")
+
 );
 
+CREATE TABLE token (
+    token_id INT GENERATED ALWAYS AS IDENTITY,
+    user_id INT NOT NULL,
+    token CHAR(36) UNIQUE,
+    PRIMARY KEY (token_id),
+    FOREIGN KEY (user_id) REFERENCES users("user_id")
+);
 
-ALTER TABLE
-    "events" ADD PRIMARY KEY("event_id");
-ALTER TABLE
-    "share_links" ADD PRIMARY KEY("link_id");
-ALTER TABLE
-    "share_links" ADD CONSTRAINT "share_links_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("user_id");
-ALTER TABLE
-    "events" ADD CONSTRAINT "events_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("user_id");
 
 
 
