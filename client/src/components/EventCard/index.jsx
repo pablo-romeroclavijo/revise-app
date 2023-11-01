@@ -1,63 +1,106 @@
 import React, { useState } from 'react';
+import EditPopup from '../EditPopup';
 
-export default function EventCard({ info, events, setEvents }) {
-  const { event } = info;
-  const { _instance } = event;
-  const { range } = _instance;
-
+const EventCard = ({ eventInfo, onDelete, onEdit }) => {
+  console.log(eventInfo.extendedProps) 
+  
   const [isEditing, setIsEditing] = useState(false);
-  const [editedEvent, setEditedEvent] = useState({});
+  const [editedEvent, setEditedEvent] = useState({ ...eventInfo.extendedProps });
+  const start = new Date(eventInfo.extendedProps.start_date);
+  const end = new Date(eventInfo.extendedProps.end_date);
 
-  const handleEditEvent = () => {
+  const handleEdit = () => {
+    //document.body.style.backgroundColor = "#7F0909";
     setIsEditing(true);
-    setEditedEvent(event); 
   };
 
-  const handleSaveEdit = () => {
+  const handleSave = () => {
+    // You can add validation here to ensure data is correctly formatted
+    onEdit(editedEvent);
+    setIsEditing(false);
+  };
+
+  const handleDelete = () => {
+    onDelete(eventInfo.extendedProps.event_id);
+  };
+
+  function onCancel() {
+    //document.body.style.backgroundColor = "#7F0909";
     setIsEditing(false);
     
-    const updatedEvents = events.map((e) =>
-      e.id === editedEvent.id ? editedEvent : e
-      
-    );
-    setEvents(updatedEvents);
-  };
+  }
 
-  const handleCancelEdit = () => {
-    setIsEditing(false);
-  };
-
-  const handleDeleteEvent = () => {
-    const updatedEvents = events.filter((e) => e.publicId !== event.publicId);
-    setEvents(updatedEvents);
-  };
-
-  if (isEditing) {
-    return (
-      <div>
-        <input
-          type="text"
-          value={editedEvent.title}
-          onChange={(e) =>
-            setEditedEvent({ ...editedEvent, title: e.target.value })
-          }
-        />
-        <button onClick={handleSaveEdit}>Save</button>
-        <button onClick={handleCancelEdit}>Cancel</button>
+  return (
+    <div className='event-card'>
+      <div onClick={handleEdit}>
+        <h3>{eventInfo.title}</h3>
+        <p>Subject: {eventInfo.extendedProps.subject}</p>
+        <p>Description: {eventInfo.extendedProps.description}</p>
+        <p>Location: {eventInfo.extendedProps.location}</p>
+        <p>Priority: {eventInfo.extendedProps.priority}</p>
+        <p>Start: {start.toLocaleString()}</p>
+        <p>End: {end.toLocaleString()}</p>
+        
+        
       </div>
-    );
-  } else if (range) {
-    const eventStart = range.start.toLocaleTimeString();
-    const eventEnd = range.end.toLocaleTimeString();
-    console.log(events)
-    return (
-      <div>
-        <p>
-          {eventStart} - {eventEnd} - {event.title}
-        </p>
-        <button onClick={handleEditEvent}>Edit</button>
-        <button onClick={handleDeleteEvent}>Delete</button>
-      </div>
-    );
-  } 
-}
+      {isEditing && (
+        <div className="overlay">
+          <div className="edit-popup">
+            <h3>Edit Event</h3>
+
+
+            <label htmlFor="eventTitle">Event Title:</label>
+            <input
+              type="text"
+              id="eventTitle"
+              value={eventInfo.title}
+              onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
+            />
+
+
+            <label htmlFor="eventSubject">Event Subject:</label>
+            <input
+              type="text"
+              id="eventSubject"             
+              value={editedEvent.subject}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+            <label htmlFor="eventDescription">Event Description:</label>
+            <input
+              type="text"
+              id="eventDescription"             
+              value={editedEvent.description}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+            <label htmlFor="eventLocation">Event Location:</label>
+            <input
+              type="text"
+              id="eventLocation"             
+              value={editedEvent.location}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+            <label htmlFor="eventPriority">Event Priority:</label>
+            <input
+              type="text"
+              id="eventPriority"             
+              value={editedEvent.priority}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+
+            {/* Add more input fields for editing */}
+            <button onClick={handleSave}>Save</button>
+            <button onClick={handleDelete}>Delete</button>
+            <button onClick={onCancel}>Cancel</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default EventCard;
+
