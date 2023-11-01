@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest connect.test.js routes.test.js",
+    "test": "jest --testPathPattern=/unit/ --watchAll --verbose",
+    "integrationTests": "jest --testPathPattern=/integration/ --watchAll --detectOpenHandles --runInBand --verbose",
     "dev": "nodemon -L index.js",
     "start": "node index.js",
     "setup-db": "node ./database/setup-db.js",

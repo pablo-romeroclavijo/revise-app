@@ -251,9 +251,7 @@ function Timetable() {
       />
     </div>
   );
-
-  
-  
 }
 
 export default Timetable;
+
