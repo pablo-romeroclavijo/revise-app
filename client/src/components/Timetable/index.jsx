@@ -111,4 +111,4 @@ export default function Timetable({ events, setEvents }) {
       />
     </div>
   );
-}
+} 
