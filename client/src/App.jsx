@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import "./App.css";
 import { Routes, Route } from 'react-router-dom';
 import {TimetablePage, LoginPage, NotFoundPage} from './pages'
 const App = () => {
