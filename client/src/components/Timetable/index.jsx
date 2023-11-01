@@ -18,8 +18,10 @@ const apiUrl = "https://revise-app.onrender.com"
 function Timetable() {
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('default')
-  const [subjects, setSubjects] = useState(['Maths', 'History', 'English', 'Science', 'Physics'])
-  
+  const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
+  const [subjects, setSubjects] = useState(subjectsDef)
+  const [activeSubjects, setActive] = useState(subjectsDef)
+
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -283,7 +285,6 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
   console.log(events)
 
 
-
 let themeImport
 const themes = {
   default:'default',
@@ -302,11 +303,13 @@ useEffect( ()=>{
   changeTheme()
 },[theme])
 
+useEffect(()=>{console.log(subjects)},[subjects])
+
 
   return (
     <div>
       <FilterTheme theme = {theme} setTheme = {setTheme}/>
-      <FilterSubject subjects={subjects} setSubjects={setSubjects}/>
+      <FilterSubject subjects={subjects} setActive={setActive} activeSubjects = {activeSubjects}/>
       <FullCalendar
         editable
         selectable
