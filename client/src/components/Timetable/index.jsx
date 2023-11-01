@@ -7,7 +7,7 @@ import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
 
 import { v4 as uuid } from 'uuid';
-import {EventCard, FilterTheme} from '../index'
+import {EventCard, FilterTheme, FilterSubject} from '../index'
 
 import { Theme } from '@fullcalendar/core/internal';
 
@@ -18,6 +18,7 @@ const apiUrl = "https://revise-app.onrender.com"
 function Timetable() {
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('default')
+  const [subjects, setSubjects] = useState(['Maths', 'History', 'English', 'Science', 'Physics'])
   
   useEffect(() => {
     fetchEvents();
@@ -305,6 +306,7 @@ useEffect( ()=>{
   return (
     <div>
       <FilterTheme theme = {theme} setTheme = {setTheme}/>
+      <FilterSubject subjects={subjects} setSubjects={setSubjects}/>
       <FullCalendar
         editable
         selectable
