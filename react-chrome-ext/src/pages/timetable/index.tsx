@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import { Timetable } from '../../components';
-import { useNavigate } from 'react-router-dom';
 
 const apiUrl = "https://revise-app.onrender.com"
+import EventCard from '../../components/eventcard';
+
+
+
 const TimetablePage = () => {
 
   async function fetchEvents(){
@@ -25,6 +27,7 @@ const TimetablePage = () => {
 
   const [events, setEvents] = useState([]);
 
+
   useEffect(() => {
       fetchEvents()//request event data
       console.log(events)
@@ -34,9 +37,10 @@ const TimetablePage = () => {
   return (
     <>
         {console.log('aa', events)}
-        {events.map(a =>
-             <p>{a['description']}</p>
-         )}
+        <h1>Your schedule for the day:</h1>
+        <div className='event-card-container'>
+          {!events ? <p>Loading...</p> : events.map(event => <EventCard event={event}/>)}
+        </div>
     </>
   );
 };

@@ -1,12 +1,43 @@
-.App {
+
+
+.root {
   color: white;
   text-align: center;
-}
 
-.container {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: auto;
+
 
   background-color: green;
 
+}
+.event-card-container{
+  display:flex;
+  margin: auto;
+  width: 225px;
+  height: 500px;
+  border-radius: 10px;
+
+  flex-direction: column;
+  overflow: scroll;
+  max-height: 700px;
+  column-gap: 10px;
+  row-gap: 10px;
+  flex-shrink: 0
+
+
+
+}
+
+.event-card{
+  color: black;
+  width: 225px;
+  background-color: beige;
+  border-radius: 10px;
+  padding-bottom: 10px;
+
+}
+
+.event-card h3{
+  text-align: left;
 }
