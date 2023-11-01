@@ -1,5 +1,7 @@
 const Event = require('../../../models/Events')
 const db = require('../../../database/connect')
+const { response } = require('../../../app')
+const { describe } = require('node:test')
 
 describe('Events',() => {
     beforeEach(() => jest.clearAllMocks())
@@ -131,7 +133,6 @@ describe('Events',() => {
                 priority: 'H'
                 
             }
-            jest.spyOn(db, 'query').mockRejectedValue(new Error('oh no'))
 
             jest.spyOn(db, 'query')
               .mockResolvedValueOnce({ rows: [] })
@@ -174,9 +175,10 @@ describe('Events',() => {
                 });
               //not static so need an instance
               console.log(event)
-              const deletedUser = await event.delete();
-              expect(deletedUser).toBeInstanceOf(Event); // Check if it's an instance of the Skill class.
-              //expect(deletedUser.user_id).toBe(2);
+              const deletedEvent = await event.delete();
+              expect(deletedEvent).toBeInstanceOf(Event); // Check if it's an instance of the Skill class.
+              expect(deletedEvent.event_id).toBe(2);
+              expect(deletedEvent).not.toEqual(Event)
               
         })
 
@@ -204,15 +206,220 @@ describe('Events',() => {
     })
     
     describe('destroyAll', ()=>{
-        it("test",  () => {
-            
-            
+        it("delete all test under the user when no subject is given",  async() => {
+                
+            mockEvent = [
+            {
+                event_id: 1,
+                user_id: 4,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'project', 
+                priority: 'H'
+            },
+            {
+                event_id: 2,
+                user_id: 4,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+            },
+            {
+                event_id: 2,
+                user_id: 4,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+            },
+            ]
+        
+        jest.spyOn(db, "query")
+            .mockResolvedValueOnce({rows : mockEvent})
+                
+        const response = await Event.deleteAll( 4 , [])
+        expect(response).toHaveLength(3)
+        expect(response).toBeInstanceOf(Array)
+        })
+        
+        it("when unable to delete", async() => {
+            jest.spyOn(db, "query")
+                .mockResolvedValueOnce({rows :[]})
+            try{
+            const response = await Event.deleteAll( 4 ,  [])
+            expect(response).toHaveLength(0) 
+            }catch(err){
+                expect(err).toBeDefined()
+                expect(err.message).toBe("Unable to delete events")
+            }
         })
 
-        it("fail test",  () => {
-            
 
+            it.skip("delete all events under the user that has given subject",  async() => {
+                mockEvent = [
+                {
+                    event_id: 1,
+                    user_id: 4,
+                    start_date: '2023-11-06 10:30:00',
+                    end_date : '2023-11-06 11:00:00', 
+                    title : 'Meeting',
+                    description: 'Discuss project progress', 
+                    location: 'Meeting Room 1', 
+                    subject: 'project', 
+                    priority: 'H'
+                },
+                {
+                    event_id: 2,
+                    user_id: 4,
+                    start_date: '2023-11-06 10:30:00',
+                    end_date : '2023-11-06 11:00:00', 
+                    title : 'Meeting',
+                    description: 'Discuss project progress', 
+                    location: 'Meeting Room 1', 
+                    subject: 'Poject', 
+                    priority: 'H'
+                },
+                {
+                    event_id: 2,
+                    user_id: 4,
+                    start_date: '2023-11-06 10:30:00',
+                    end_date : '2023-11-06 11:00:00', 
+                    title : 'Meeting',
+                    description: 'Discuss project progress', 
+                    location: 'Meeting Room 1', 
+                    subject: 'Anime', 
+                    priority: 'H'
+                },
+            ]
+            
+                jest.spyOn(db, "query")
+                    .mockResolvedValueOnce({rows : mockEvent})
+                    
+                const response = await Event.deleteAll( 4 , ['Anime', 'Project'])
+               
+                expect(response).toHaveLength(3)
+                expect(response).toBeInstanceOf(Array)
+                
+            })
+            
+            it("when unable to delete", async() => {
+                jest.spyOn(db, "query")
+                    .mockResolvedValueOnce({rows :[]})
+                try{
+                const response = await Event.deleteAll( 4 , ['Anime', 'Project'])
+                expect(response).toHaveLength(0) 
+                }catch(err){
+                    expect(err).toBeDefined()
+                    expect(err.message).toBe("Unable to delete events")
+                }
+            })
+    })
+    describe("update", () => {
+        it("update a data", async() => {
+           const mockEvent = new Event({
+                event_id: 2,
+                user_id: 4,
+                start_dat: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+           })
+           const mockTest = { 
+                event_id: 1,
+                user_id: 4,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00',
+            }
+            const data={
+                event_id: 1,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00',
+            }
+            jest.spyOn(db, "query")
+                .mockResolvedValueOnce({rows: [mockTest]})
+
+            console.log(mockEvent)
+            const response = await mockEvent.update(data)
+            expect(response).toBeInstanceOf(Event)
+        })
+        it("update fails", async() => {
+            const mockEvent = new Event({
+                event_id : 1
+            })
+            jest.spyOn(db,"query")
+                .mockResolvedValueOnce({rows : []})
+            try{
+                await mockEvent.update({
+                    start_date: '2023-11-06 10:30:00',
+                    end_date : '2023-11-06 11:00:00',})
+            }catch(err){
+                expect(err).toBeDefined()
+                expect(err.message).toBeTruthy()
+                expect(err.message).toBe('Unable to edit event')
+
+            }
         })
     })
-    
+    describe("update", () => {
+        it("update a data", async() => {
+           const mockEvent = new Event({
+                event_id: 2,
+                user_id: 4,
+                start_dat: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00', 
+                title : 'Meeting',
+                description: 'Discuss project progress', 
+                location: 'Meeting Room 1', 
+                subject: 'Poject', 
+                priority: 'H'
+           })
+           const mockTest = { 
+                event_id: 1,
+                user_id: 4,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00',
+            }
+            const data={
+                event_id: 1,
+                start_date: '2023-11-06 10:30:00',
+                end_date : '2023-11-06 11:00:00',
+            }
+            jest.spyOn(db, "query")
+                .mockResolvedValueOnce({rows: [mockTest]})
+
+            console.log(mockEvent)
+            const response = await mockEvent.updateTime(data)
+            expect(response).toBeInstanceOf(Event)
+        })
+        it("update fails", async() => {
+            const mockEvent = new Event({
+                event_id : 1
+            })
+            jest.spyOn(db,"query")
+                .mockResolvedValueOnce({rows : []})
+            try{
+                await mockEvent.updateTime({
+                    start_date: '2023-11-06 10:30:00',
+                    end_date : '2023-11-06 11:00:00',})
+            }catch(err){
+                expect(err).toBeDefined()
+                expect(err.message).toBeTruthy()
+                expect(err.message).toBe('Unable to edit event')
+
+            }
+        })
+    })
 })
