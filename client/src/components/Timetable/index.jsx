@@ -123,9 +123,10 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
       const updatedEvents = events.map((event) => {
         if (event.event_id === eventInfo.event.extendedProps.event_id) {
           // Update the event's start and end dates
-          event.start = eventInfo.event.extendedProps.start_date;
-          event.end = eventInfo.event.extendedProps.end_date;
-          console.log("awwaawaw", event.start, event.end);
+          console.log("2222222", event);
+          event.start = eventInfo.event._instance.range.start;
+          event.end = eventInfo.event._instance.range.end;
+          
     
           // Call updateTime with the updated event data
           updateTime({
@@ -263,6 +264,7 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
       });
 
       setEvents(updatedEvents);
+      await fetchEvents();
     } else {
       alert('Unable to update event');
     }

@@ -19,5 +19,8 @@ button {
     left: 50%; /* Adjust this value to center the popup horizontally */
     transform: translate(-50%, -50%);
     background: white;
-    z-index: 1001; /* Ensure it's on top of the overlay */
+    z-index: 2147483647; /* Ensure it's on top of the overlay */
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
   }

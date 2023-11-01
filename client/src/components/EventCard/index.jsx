@@ -24,31 +24,77 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
     onDelete(eventInfo.extendedProps.event_id);
   };
 
+  function onCancel() {
+    //document.body.style.backgroundColor = "#7F0909";
+    setIsEditing(false);
+    
+  }
+
   return (
     <div className='event-card'>
-      <div>
-        <h3>{eventInfo.extendedProps.title}</h3>
+      <div onClick={handleEdit}>
+        <h3>{eventInfo.title}</h3>
         <p>Subject: {eventInfo.extendedProps.subject}</p>
         <p>Description: {eventInfo.extendedProps.description}</p>
         <p>Location: {eventInfo.extendedProps.location}</p>
         <p>Priority: {eventInfo.extendedProps.priority}</p>
         <p>Start: {start.toLocaleString()}</p>
         <p>End: {end.toLocaleString()}</p>
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={handleDelete}>Delete</button>
+        
+        
       </div>
       {isEditing && (
         <div className="overlay">
           <div className="edit-popup">
             <h3>Edit Event</h3>
+
+
+            <label htmlFor="eventTitle">Event Title:</label>
             <input
-              type='text'
-              placeholder='Event Title'
-              value={editedEvent.title}
+              type="text"
+              id="eventTitle"
+              value={eventInfo.title}
               onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
             />
+
+
+            <label htmlFor="eventSubject">Event Subject:</label>
+            <input
+              type="text"
+              id="eventSubject"             
+              value={editedEvent.subject}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+            <label htmlFor="eventDescription">Event Description:</label>
+            <input
+              type="text"
+              id="eventDescription"             
+              value={editedEvent.description}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+            <label htmlFor="eventLocation">Event Location:</label>
+            <input
+              type="text"
+              id="eventLocation"             
+              value={editedEvent.location}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+            <label htmlFor="eventPriority">Event Priority:</label>
+            <input
+              type="text"
+              id="eventPriority"             
+              value={editedEvent.priority}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+            />
+
+
             {/* Add more input fields for editing */}
             <button onClick={handleSave}>Save</button>
+            <button onClick={handleDelete}>Delete</button>
+            <button onClick={onCancel}>Cancel</button>
           </div>
         </div>
       )}
