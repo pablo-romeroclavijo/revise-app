@@ -58,7 +58,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
 
   return (
     <div className='event-card'>
-      <div onClick={handleEdit} className='test' style={styles}>
+      <div onClick={handleEdit} className='row' style={styles}>
         <h3>{time.hour}:{time.minute == 0 ? "00" : time.minute}</h3>
         <h3>{eventInfo.title}</h3>
         {/* <p>Subject: {eventInfo.extendedProps.subject}</p>

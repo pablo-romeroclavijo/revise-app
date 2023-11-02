@@ -29,13 +29,42 @@
     height: 80vh !important;
     
 }
+.event-card{
  
+   width: 100%;
+   border-radius: 10px;
+   padding-bottom: 5px;}
 
-.test {
+.row {
+   text-align: left;
+   padding: 10px;
+   padding-bottom: 0px;
+   display: flex;
+   justify-content: flex-start;
+   column-gap: 15px;
+   margin-bottom: 0px;
+   
+    }
+
+.row h3{
+   margin-top:0px
+}
+ 
+.fc-daygrid-day-frame {
+   display: flex;
+   flex-direction: column;
+   overflow: scroll;
+   height: 150px;
+} 
+
+.fc-daygrid-event-harness a {
+   height: 40px;
+   margin-bottom: 5px;
     
  }
 
  .hideEvent {
+   
     display: none !important;
     background-color: rgba(0, 0, 0, 0.39) !important;
  }

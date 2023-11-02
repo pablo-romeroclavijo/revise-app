@@ -7,14 +7,17 @@
 
   .side-bar{
     float:left;
+    margin-top: 65px;
     width: 15%;
     font-family: 'Hind', sans-serif;
     color: #264653;
     background-color: #E35734;
     margin-right: 15px;
+    margin-left: 10px;
     height: 500px;
     border-radius: 15px;
-    padding: 20px
+    padding-left: 20px;
+    padding-top: 10px;
 
     }
 
