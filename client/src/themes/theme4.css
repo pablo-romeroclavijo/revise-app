@@ -13,11 +13,11 @@
     --fc-button-active-border-color: #f72585;
     --fc-button-hover-bg-color: #7209b7;
     --fc-button-hover-border-color: #7209b7;
-    --fc-event-bg-color: #b5179e;
-    --fc-event-border-color: #b5179e;
-    --fc-border-color: rgb(38, 70, 83, 0.15);
+    --fc-event-bg-color: #ab89f0;
+    --fc-event-border-color: #ab89f0;
+    --fc-border-color: transparent;
     --fc-neutral-text-color: #264653;
-    --fc-page-bg-color: #3a0ca3;
+    --fc-page-bg-color: #edebf2;
     --fc-button-text-color: #264653; 
   } 
   
@@ -25,8 +25,8 @@
     display: flex;
     flex-direction: column;
     font-size: 1em;
-    background-color: #3f37c9;
-    border-color: #264653;
+    background-color: #f8f7fa;
+    border-color: transparent;
     color: #3f37c9;
     font-family: 'Pixelify Sans', sans-serif;
     box-sizing: border-box;
@@ -37,18 +37,15 @@
     position: relative;
     border-radius: 10px;
     background-color: #4cc9f0;
-    margin: 2px 2px 2px 2px;
     } 
-
+    
     .fc .fc-scrollgrid-sync-inner {
         /* background-color: #f5f2fc; */
-        background-color: #4cc9f0;
+        background-color: white;
         border-radius: 10px;
-        padding: 10px;
         padding: 5px 0px 5px 0px;
         margin: 2px 2px 2px 2px;
-      }
-
+    }
   
   .fc-direction-ltr { 
       direction: ltr; 

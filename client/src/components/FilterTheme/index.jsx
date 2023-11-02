@@ -14,7 +14,8 @@ function FilterTheme({theme, setTheme}){
                 <option value="default" className="type">Default</option>
                 <option value="theme1" className="type">Theme 1</option>
                 <option value="theme2" className="type">Theme 2</option>
-                <option value="theme3" className="type">Theme 3</option>
+                <option value="theme3" className="type">Jester</option>
+                <option value="theme4" className="type">Smoke</option>
                 
 
             </select>
