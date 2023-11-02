@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import EditPopup from '../EditPopup';
 const styles = ({ paddingLeft: 10, paddingRight: 0});
+//import EditPopup from '../EditPopup';
 
 const EventCard = ({ eventInfo, onDelete, onEdit }) => {
   console.log(eventInfo.extendedProps) 
   
   const [isEditing, setIsEditing] = useState(false);
-  const [editedEvent, setEditedEvent] = useState({ ...eventInfo.extendedProps });
+  const [editedEvent, setEditedEvent] = useState({ title: eventInfo.title, ...eventInfo.extendedProps });
   const start = new Date(eventInfo.extendedProps.start_date);
   const end = new Date(eventInfo.extendedProps.end_date);
 
   const handleEdit = () => {
-    //document.body.style.backgroundColor = "#7F0909";
+    const elements = document.querySelectorAll('.test');
+
+    elements.forEach(element => {
+    element.classList.add('hideEvent');
+    });
     setIsEditing(true);
   };
 
@@ -27,20 +32,25 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
 
   function onCancel() {
     //document.body.style.backgroundColor = "#7F0909";
+    const elements = document.querySelectorAll('.test');
+    elements.forEach(element => {
+      element.classList.remove('hideEvent');
+      });
     setIsEditing(false);
+    
     
   }
 
   return (
     <div className='event-card'>
-      <div onClick={handleEdit} style={styles}>
+      <div onClick={handleEdit} className='test' style={styles}>
         <h3>{eventInfo.title}</h3>
-        <p>Subject: {eventInfo.extendedProps.subject}</p>
+        {/* <p>Subject: {eventInfo.extendedProps.subject}</p>
         <p>Description: {eventInfo.extendedProps.description}</p>
         <p>Location: {eventInfo.extendedProps.location}</p>
         <p>Priority: {eventInfo.extendedProps.priority}</p>
         <p>Start: {start.toLocaleString()}</p>
-        <p>End: {end.toLocaleString()}</p>
+        <p>End: {end.toLocaleString()}</p> */}
         
         
       </div>
@@ -54,7 +64,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
             <input
               type="text"
               id="eventTitle"
-              value={eventInfo.title}
+              value={editedEvent.title}
               onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
             />
 
@@ -72,7 +82,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
               type="text"
               id="eventDescription"             
               value={editedEvent.description}
-              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+              onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
             />
 
             <label htmlFor="eventLocation">Event Location:</label>
@@ -80,7 +90,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
               type="text"
               id="eventLocation"             
               value={editedEvent.location}
-              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+              onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })}
             />
 
             <label htmlFor="eventPriority">Event Priority:</label>
@@ -88,7 +98,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
               type="text"
               id="eventPriority"             
               value={editedEvent.priority}
-              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+              onChange={(e) => setEditedEvent({ ...editedEvent, priority: e.target.value })}
             />
 
 
@@ -100,7 +110,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
         </div>
       )}
     </div>
-  );
+  )
 };
 
 export default EventCard;

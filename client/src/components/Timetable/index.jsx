@@ -7,9 +7,10 @@ import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
 
 import { v4 as uuid } from 'uuid';
-import {EventCard, FilterTheme} from '../index'
+import {EventCard, FilterTheme, FilterSubject} from '../index'
 
 import { Theme } from '@fullcalendar/core/internal';
+import '../../themes/default.css'
 
 
 const apiUrl = "https://revise-app.onrender.com"
@@ -18,7 +19,10 @@ const apiUrl = "https://revise-app.onrender.com"
 function Timetable() {
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('default')
-  
+  const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
+  const [subjects, setSubjects] = useState(subjectsDef)
+  const [activeSubjects, setActive] = useState(subjectsDef)
+
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -282,7 +286,6 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
   console.log(events)
 
 
-
 let themeImport
 const themes = {
   default:'default',
@@ -291,21 +294,42 @@ const themes = {
   theme3: 'theme3',
   theme4: 'theme4'
 }
+//
 
 useEffect( ()=>{
+  
   const style = document.getElementsByTagName('style')
-  console.log(style)
+
+  if(style[1]){
+    console.log(style[1])
+    style[1].remove()
+    console.log('style removed')}
+
   async function changeTheme(){
-    console.log(theme)
-    themeImport = await import (`../../themes/${themes[theme]}.css`)
+    // const path = style[1].getAttribute('data-vite-dev-id')
+    // const newPath = path.substring(0, path.lastIndexOf('/')) + '/' + themes[theme] + '.css';
+    // const documentStyles = fs.readFileSync(newPath)
+    // console.log(documentStyles)
+    // console.log(theme)
+    // style[1].innerHTML = ''
+    // const path = style[1].getAttribute('data-vite-dev-id')
+    // console.log('path:',path)
+    // const newPath = path.substring(0, path.lastIndexOf('/')) + '/' + themes[theme] + '.css';
+    // console.log('path2:', newPath)
+    // await style[1].setAttribute('data-vite-dev-id', newPath)
+    await import (`../../themes/${themes[theme]}.css`)
+   
   }
   changeTheme()
 },[theme])
+
+useEffect(()=>{console.log(subjects)},[subjects])
 
 
   return (
     <div>
       <FilterTheme theme = {theme} setTheme = {setTheme}/>
+      <FilterSubject subjects={subjects} setActive={setActive} activeSubjects = {activeSubjects}/>
       <FullCalendar
         editable
         selectable
