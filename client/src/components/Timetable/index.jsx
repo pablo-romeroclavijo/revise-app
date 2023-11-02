@@ -374,7 +374,7 @@ const themes = {
 useEffect(() => {
   async function changeTheme() {
     const style = document.getElementsByTagName('style');
-
+    console.log(style);
     const themeImport = await import(`../../themes/${themes[theme]}.css`);
     const styleElement = document.createElement('style');
     styleElement.appendChild(document.createTextNode(themeImport.default));
