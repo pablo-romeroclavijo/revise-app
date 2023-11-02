@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import EditPopup from '../EditPopup';
 
-const EventCard = ({ eventInfo, onDelete, onEdit }) => {
+const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
   //console.log(eventInfo.extendedProps) 
   
   const [isEditing, setIsEditing] = useState(false);
@@ -52,7 +52,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
         
         
       </div>
-      {isEditing && (
+      {isEditing && isUser && (
         <div className="overlay">
           <div className="edit-popup">
             <h3>Edit Event</h3>
@@ -103,6 +103,64 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
             {/* Add more input fields for editing */}
             <button onClick={handleSave}>Save</button>
             <button onClick={handleDelete}>Delete</button>
+            <button onClick={onCancel}>Cancel</button>
+          </div>
+        </div>
+      )}
+      {isEditing && !isUser && (
+        <div className="overlay">
+          <div className="edit-popup">
+            <h3>Event Details</h3>
+
+
+            <label htmlFor="eventTitle">Event Title:</label>
+            <input
+              type="text"
+              id="eventTitle"
+              value={editedEvent.title}
+              onChange={(e) => setEditedEvent({ ...editedEvent, title: e.target.value })}
+              readOnly
+            />
+
+
+            <label htmlFor="eventSubject">Event Subject:</label>
+            <input
+              type="text"
+              id="eventSubject"             
+              value={editedEvent.subject}
+              onChange={(e) => setEditedEvent({ ...editedEvent, subject: e.target.value })}
+              readOnly
+            />
+
+            <label htmlFor="eventDescription">Event Description:</label>
+            <input
+              type="text"
+              id="eventDescription"             
+              value={editedEvent.description}
+              onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
+              readOnly
+            />
+
+            <label htmlFor="eventLocation">Event Location:</label>
+            <input
+              type="text"
+              id="eventLocation"             
+              value={editedEvent.location}
+              onChange={(e) => setEditedEvent({ ...editedEvent, location: e.target.value })}
+              readOnly
+            />
+
+            <label htmlFor="eventPriority">Event Priority:</label>
+            <input
+              type="text"
+              id="eventPriority"             
+              value={editedEvent.priority}
+              onChange={(e) => setEditedEvent({ ...editedEvent, priority: e.target.value })}
+              readOnly
+            />
+
+
+            {/* Add more input fields for editing */}
             <button onClick={onCancel}>Cancel</button>
           </div>
         </div>

@@ -24,9 +24,10 @@ function Timetable({linkCode}) {
   const [activeSubjects, setActive] = useState(subjectsDef)
   const [link, setLink] = useState('');
   const [filteredEvents, setFiltered] = useState(events)
-
+  const [isUser, setIsUser] = useState(false);
   useEffect(() => {
     if (!linkCode) {
+      setIsUser(true);
       fetchEvents();
     } else {
       getSharedEvents(apiUrl + "/link/" + linkCode)
@@ -398,8 +399,8 @@ useEffect(()=>{console.log(subjects)},[subjects])
       <input class="linkBox" type="text" value={link} readOnly/>
 
         <FullCalendar 
-          editable
-          selectable
+          editable={isUser}
+          selectable={isUser}
           ref={calendarRef}
           select={handleSelect}
           events={filteredEvents}
@@ -413,6 +414,7 @@ useEffect(()=>{console.log(subjects)},[subjects])
               eventInfo={event}
               onDelete={deleteEvent}
               onEdit={update}
+              isUser={isUser}
             />
           )}
           plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, bootstrap5Plugin]}
