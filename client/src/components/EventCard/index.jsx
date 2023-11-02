@@ -53,10 +53,13 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
     
     
   }
+  const eventDate = new Date(eventInfo.extendedProps.start_date)
+  const time = {hour: eventDate.getHours(), minute :eventDate.getMinutes()}
 
   return (
     <div className='event-card'>
       <div onClick={handleEdit} className='test' style={styles}>
+        <h3>{time.hour}:{time.minute == 0 ? "00" : time.minute}</h3>
         <h3>{eventInfo.title}</h3>
         {/* <p>Subject: {eventInfo.extendedProps.subject}</p>
         <p>Description: {eventInfo.extendedProps.description}</p>
