@@ -1,20 +1,20 @@
 
 
 .root {
-  color: white;
+  color: black;
   text-align: center;
 
-  width: 250px;
-  height: auto;
+  width: 350px;
+  min-height: 350px;
 
 
-  background-color: #06D6A0;
+  background-color: #fcf8eb;
 
 }
 .event-card-container{
   display:flex;
   margin: auto;
-  width: 225px;
+  width: 300px;
   height: 500px;
   border-radius: 10px;
 
@@ -31,8 +31,8 @@
 
 .event-card{
   color: black;
-  width: 225px;
-  background-color: #fcf8eb;
+  width: 100%;
+  background-color: #06D6A0 ;
   border-radius: 10px;
   padding-bottom: 10px;
 
