@@ -14,10 +14,6 @@ describe('api server', () => {
     api = app.listen(port, () => {
       console.log('🌕Test server running in port '+port)
     })
-
-    const response = await fetch('http://localhost:5001/event')
-    const data = await response.json()
-    console.log(data)
   })
 
   afterAll((done) => {
@@ -29,14 +25,14 @@ describe('api server', () => {
     request(api)
       .get('/')
       .expect(200, done)
-  }, 10000)
+  })
 
   test('responds to GET /event/:id with status 200', (done) => {
     
     request(api)
       .get('/event/1')
       .expect(200,done)
-  }, 10000)
+  })
 
   test('responds to GET /event with status 200', () => {
     
@@ -44,10 +40,7 @@ describe('api server', () => {
       .get('/event')
       .set('Authorization', 'sdfsfafsfasdf')
       .expect(200)
-  }, 10000)
-
-
-
+  })
 
 })
 
