@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
-import path from 'path-browserify'
+
 import { v4 as uuid } from 'uuid';
 import {EventCard, FilterTheme, FilterSubject} from '../index'
 
@@ -298,23 +298,26 @@ const themes = {
 useEffect( ()=>{
   
   const style = document.getElementsByTagName('style')
-  //console.log(style[1].getAttribute('data-vite-dev-id'))
-  //console.log(style[1].id)
-  // if(style[1]){
-  //   console.log(style[1])
-  //   console.log(style[1].getAttribute('data-vite-dev-id'))
-  //   style[1].remove()
-  //   console.log('style removed')}
+
+  if(style[1]){
+    console.log(style[1])
+    style[1].remove()
+    console.log('style removed')}
 
   async function changeTheme(){
+    // const path = style[1].getAttribute('data-vite-dev-id')
+    // const newPath = path.substring(0, path.lastIndexOf('/')) + '/' + themes[theme] + '.css';
+    // const documentStyles = fs.readFileSync(newPath)
+    // console.log(documentStyles)
     // console.log(theme)
+    // style[1].innerHTML = ''
     // const path = style[1].getAttribute('data-vite-dev-id')
     // console.log('path:',path)
-    // const newPath = path.substring(0, path.lastIndexOf('/'));
+    // const newPath = path.substring(0, path.lastIndexOf('/')) + '/' + themes[theme] + '.css';
     // console.log('path2:', newPath)
-    // await style[1].setAttribute('data-vite-dev-id',)
-    // await import (`../../themes/${themes[theme]}.css`)
-    // console.log(themeImport)
+    // await style[1].setAttribute('data-vite-dev-id', newPath)
+    await import (`../../themes/${themes[theme]}.css`)
+   
   }
   changeTheme()
 },[theme])
