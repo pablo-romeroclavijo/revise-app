@@ -392,13 +392,27 @@ useEffect(() => {
 useEffect(()=>{},[subjects])
 //console.log(events)
 
+const linkInputRef = React.createRef();
+function copyToClipboard(){
+  linkInputRef.current.select();
+  document.execCommand('copy');
+};
+
   return (
     <div className='timetable-container'>
       <div className='side-bar'>
         <FilterTheme theme = {theme} setTheme = {setTheme}/>
         <FilterSubject subjects={subjects} setActive={setActive}/>
-        <button onClick={getShareLink}>Generate Share Link</button>
-        <input class="linkBox" type="text" value={link} readOnly style= {{width:"90%", marginRight:"20px"}} />
+
+        {isUser && (<>
+          <button onClick={getShareLink}>Generate Share Link</button>
+          <input ref={linkInputRef} class="linkBox" type="text" value={link} readOnly style= {{width:"90%", marginRight:"20px"}} />
+          <button onClick={copyToClipboard}>Copy Link</button>
+          </>
+        )}
+        
+        
+
       </div>
       <div className="calendar">
 
