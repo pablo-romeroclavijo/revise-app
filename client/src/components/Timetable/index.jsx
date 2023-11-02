@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 import {EventCard, FilterTheme, FilterSubject} from '../index'
 
 import { Theme } from '@fullcalendar/core/internal';
-import '../../themes/theme0.css'
+import '../../themes/default.css'
 
 
 const apiUrl = "https://revise-app.onrender.com"
@@ -288,7 +288,7 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
 
 let themeImport
 const themes = {
-  default:'theme0',
+  default:'default',
   theme1: 'theme1',
   theme2:'theme2',
   theme3: 'theme3'
