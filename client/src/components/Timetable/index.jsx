@@ -16,7 +16,7 @@ import '../../themes/required.css';
 
 
 function Timetable({linkCode}) {
-  //console.log(linkCode);
+  console.log(linkCode);
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('theme1')
   const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
@@ -25,6 +25,7 @@ function Timetable({linkCode}) {
   const [link, setLink] = useState('');
   const [filteredEvents, setFiltered] = useState(events)
   const [isUser, setIsUser] = useState(false);
+  let linkCodeNew = linkCode;
   useEffect(() => {
     if (!linkCode) {
       setIsUser(true);
@@ -73,7 +74,7 @@ function Timetable({linkCode}) {
         start: event.start_date, 
         end: event.end_date,    
       }));
-  
+      modifiedData.sort((a, b)=>{const aD = new Date(a.start_date); const bD = new Date(b.start_date); return aD.getHours()-bD.getHours()})
       setEvents(modifiedData);
     } else {
       alert('Unable to fetch events');
@@ -190,8 +191,8 @@ async function getShareLink(){
   const response = await fetch(apiUrl +'/link', options)
   const data = await response.json()
   if(response.status == 200){
-    //console.log(data);
-    setLink(data.url);
+    let slicedUrl = "https://revise-app-8zto.onrender.com/timetable/" + data.url.slice(37,120);
+    setLink(slicedUrl);
     
   }else{
     alert('Unable to get link')
@@ -409,6 +410,7 @@ useEffect(()=>{console.log(subjects)},[subjects])
           events={filteredEvents}
           headerToolbar={{
             start: 'today prev next',
+            center: "title",
             end: 'dayGridMonth timeGridWeek timeGridDay',
           }}
           initialView="dayGridMonth"

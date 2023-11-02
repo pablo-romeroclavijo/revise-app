@@ -21,7 +21,7 @@ const TimetablePage = () => {
     const response = await fetch(apiUrl +'/event', options)
     const data = await response.json()
     if(response.status == 200){
-  
+      data.sort((a:any, b:any)=>{const aD = new Date(a.start_date); const bD = new Date(b.start_date); return aD.getHours()-bD.getHours()})
       setEvents(data)
     }else{
       alert('Unable to fetch events')

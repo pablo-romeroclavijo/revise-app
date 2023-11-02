@@ -82,6 +82,9 @@
       box-sizing: border-box;
   } 
   
+  .fc-toolbar-title {
+    color: #f72585;
+  }
   .fc .fc-toolbar  { 
       align-items: center; 
       display: flex; 
