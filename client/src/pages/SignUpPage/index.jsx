@@ -1,12 +1,13 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css'
-function LoginPage() {
+import './SignUp.css'
+function SignUpPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const navigate = useNavigate();
-  const handleLogin = async (e) => {
+  const handleSignUp = async (e) => {
     const options = {
         method: "POST",
         headers: {
@@ -15,32 +16,32 @@ function LoginPage() {
         },
         body: JSON.stringify({
             username: username,
+            email:email,
             password: password
         })
     }
 
 
-    const response = await fetch("https://revise-app.onrender.com/user/login", options);
+    const response = await fetch("https://revise-app.onrender.com/user/register", options);
     const data = await response.json();
     if (response.status == 200) {
-        console.log("ur logged in");
-        localStorage.setItem("token", data.token)
-        navigate("/timetable")
+        console.log("ur signed up");
+        navigate("/")
     } else {
-        console.log("ur not logged in");
+        console.log("ur not signed up");
         alert(data.error);
-        navigate("/timetable")
+        navigate("/signup")
         
     }
   };
 
-  const handleSignUp = () => {
-    navigate("/signup")
+  const handleLogin = () => {
+    navigate("/")
   }
 
   return (
-    <div className='login-container'>
-      <h1>Login</h1>
+    <div className='signup-container'>
+      <h1>Sign Up</h1>
       <input
         type="username"
         placeholder="Username"
@@ -48,15 +49,21 @@ function LoginPage() {
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Login</button>
-      <a onClick={handleSignUp}>Don't have account click here</a>
+      <button onClick={handleSignUp}>Sign Up</button>
+      <a onClick={handleLogin}>Already have an account login here</a>
     </div>
   );
 }
 
-export default LoginPage;
+export default SignUpPage;

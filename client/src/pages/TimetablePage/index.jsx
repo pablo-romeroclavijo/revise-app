@@ -16,7 +16,7 @@ const TimetablePage = () => {
       navigate('/timetable');
     }
   }, [token, navigate]);
-console.log(events)
+//console.log(events)
   return (
     <>
 

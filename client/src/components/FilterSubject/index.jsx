@@ -1,25 +1,33 @@
 import React from "react"
 
-['Maths', 'History', 'English', 'Science', 'Physics']
-
-function FilterSubject({subjects, setSubjects}){
+function FilterSubject({subjects, setActive}){
+    const form = document.getElementsByClassName('subjects')
 
     function handleFilter(e){
-        console.log(e.target.value)
-        // if(value in subjects){
-        //     subjects.filter(subject => )
-        // }
-        //setSubjects(e.target.value)
+    
+        let activeSubjects = []
+        for(let i of form){
+            console.log(i.checked)
+            if(i.checked)
+            activeSubjects.push(i["value"])
+        }
+        console.log(activeSubjects)
+        setActive(activeSubjects)
+       
+        
     }
-
-    console.log(subjects)
+    //console.log(activeSubjects)
     return ( 
-        <form onChange={handleFilter}>
-            {subjects.map(subject => <>
+        
+        <form onChange={handleFilter} id='subject-form'>
+            <h3>Filter by subject:</h3>
+            <ul>
+            {subjects.map(subject => <li>
+                <input type='checkbox' className='subjects' value={subject} name={subject} defaultChecked />
                 <label htmlFor={subject}>{subject}</label> 
-                <input type='checkbox' value={subject} name={subject} defaultChecked />
-                </>
+                </li>
              )}
+             </ul>
         </form> );
 }
 
