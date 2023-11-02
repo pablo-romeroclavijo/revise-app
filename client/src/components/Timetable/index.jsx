@@ -408,6 +408,7 @@ useEffect(()=>{console.log(subjects)},[subjects])
           events={filteredEvents}
           headerToolbar={{
             start: 'today prev next',
+            center: "title",
             end: 'dayGridMonth timeGridWeek timeGridDay',
           }}
           initialView="dayGridMonth"
