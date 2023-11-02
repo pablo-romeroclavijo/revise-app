@@ -8,7 +8,7 @@
   height: auto;
 
 
-  background-color: rgb(233, 233, 183);
+  background-color: #06D6A0;
 
 }
 .event-card-container{
@@ -32,12 +32,28 @@
 .event-card{
   color: black;
   width: 225px;
-  background-color: beige;
+  background-color: #fcf8eb;
   border-radius: 10px;
   padding-bottom: 10px;
 
 }
 
 .event-card h3{
+  display: block;
   text-align: left;
+  margin:auto;
+  margin-left: 5px;
+  width: 20px
+}
+
+.event-card p {
+  display: block;
+  margin: auto
+}
+
+.row {
+  text-align: left;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }

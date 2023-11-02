@@ -73,7 +73,7 @@ function Timetable({linkCode}) {
         start: event.start_date, 
         end: event.end_date,    
       }));
-  
+      modifiedData.sort((a, b)=>{const aD = new Date(a.start_date); const bD = new Date(b.start_date); return aD.getHours()-bD.getHours()})
       setEvents(modifiedData);
     } else {
       alert('Unable to fetch events');
