@@ -1,29 +1,28 @@
 import React from "react"
 
-function FilterSubject({subjects, setActive, activeSubjects}){
+function FilterSubject({subjects, setActive}){
+    const form = document.getElementsByClassName('subjects')
 
     function handleFilter(e){
-        const value = e.target.value
-        //console.log(value)
-        
-        if(!activeSubjects.find(subject => subject == value)){
-            activeSubjects.push(value)
-            //console.log('here3', activeSubjects)  
+    
+        let activeSubjects = []
+        for(let i of form){
+            console.log(i.checked)
+            if(i.checked)
+            activeSubjects.push(i["value"])
         }
-        else{
-            const index = activeSubjects.findIndex(subject => subject == value)
-            activeSubjects.splice(index)
-           // console.log('here', subjects)
-        }
+        console.log(activeSubjects)
         setActive(activeSubjects)
+       
         
     }
     //console.log(activeSubjects)
     return ( 
-        <form onChange={handleFilter}>
+        
+        <form onChange={handleFilter} id='subject-form'>
             {subjects.map(subject => <>
                 <label htmlFor={subject}>{subject}</label> 
-                <input type='checkbox' value={subject} name={subject} defaultChecked />
+                <input type='checkbox' className='subjects' value={subject} name={subject} defaultChecked />
                 </>
              )}
         </form> );

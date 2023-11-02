@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 //import EditPopup from '../EditPopup';
 
 const EventCard = ({ eventInfo, onDelete, onEdit }) => {
-  console.log(eventInfo.extendedProps) 
+  //console.log(eventInfo.extendedProps) 
   
   const [isEditing, setIsEditing] = useState(false);
   const [editedEvent, setEditedEvent] = useState({ title: eventInfo.title, ...eventInfo.extendedProps });

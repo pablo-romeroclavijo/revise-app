@@ -21,6 +21,24 @@
     flex-direction: column;
   }
 
+  .timetable-container{
+    width: 100%;
+    padding: 60px;
+    display: block;
+
+  }
+
+  .side-bar{
+    float: left;
+    width: 10%;
+    height: 500px;
+    background-color: grey;
+    margin-right: 15px;
+  }
+
+  .calendar{
+    width:90%
+  }
 
  
 
