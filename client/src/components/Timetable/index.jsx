@@ -373,15 +373,18 @@ const themes = {
 
 useEffect(() => {
   async function changeTheme() {
-    const style = document.getElementsByTagName('style');
+    const style = document.querySelectorAll('style[data-theme-style]');
     console.log(style);
+
+    // Load the new theme
     const themeImport = await import(`../../themes/${themes[theme]}.css`);
     const styleElement = document.createElement('style');
+    styleElement.setAttribute('data-theme-style', ''); // Add a data attribute
     styleElement.appendChild(document.createTextNode(themeImport.default));
-    
-    if (style.length > 1) {
-      console.log("more than 4", style.length);
-      await style[style.length - 1].remove();
+
+    // Remove the previous theme's style element, if it exists
+    if (style.length > 0) {
+      style[style.length - 1].remove();
     }
 
     document.head.appendChild(styleElement);
