@@ -12,10 +12,24 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
 
   const handleEdit = () => {
     const elements = document.querySelectorAll('.test');
+    const elementsEvents = document.querySelectorAll('element');
+    
+    
 
     elements.forEach(element => {
     element.classList.add('hideEvent');
     });
+
+    elementsEvents.forEach(element => {
+      element.classList.add('hideEvent');
+      });
+
+    
+
+    
+
+
+
     setIsEditing(true);
   };
 

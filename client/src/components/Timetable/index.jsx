@@ -16,7 +16,7 @@ import '../../themes/required.css';
 
 
 function Timetable({linkCode}) {
-  //console.log(linkCode);
+  console.log(linkCode);
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('theme1')
   const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
@@ -25,6 +25,7 @@ function Timetable({linkCode}) {
   const [link, setLink] = useState('');
   const [filteredEvents, setFiltered] = useState(events)
   const [isUser, setIsUser] = useState(false);
+  let linkCodeNew = linkCode;
   useEffect(() => {
     if (!linkCode) {
       setIsUser(true);
@@ -190,8 +191,8 @@ async function getShareLink(){
   const response = await fetch(apiUrl +'/link', options)
   const data = await response.json()
   if(response.status == 200){
-    //console.log(data);
-    setLink(data.url);
+    let slicedUrl = "https://revise-app-8zto.onrender.com/timetable/" + data.url.slice(37,120);
+    setLink(slicedUrl);
     
   }else{
     alert('Unable to get link')
