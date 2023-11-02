@@ -377,8 +377,8 @@ useEffect(() => {
     console.log(style);
 
     // Load the new theme
-    //const themeImport = await import(`../../themes/${themes[theme]}.css`);
-    const themeImport = await import(`../../themes/${themes[theme]}.css?v=${Date.now()}`);
+    const themeImport = await import(`../../themes/${themes[theme]}.css`);
+  
     const styleElement = document.createElement('style');
     styleElement.setAttribute('data-theme-style', ''); // Add a data attribute
     styleElement.appendChild(document.createTextNode(themeImport.default));
