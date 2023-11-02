@@ -19,7 +19,6 @@ const TimetablePage = () => {
 //console.log(events)
   return (
     <>
-
       <Timetable events={events} setEvents={setEvents} />
     </>
   );
