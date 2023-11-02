@@ -14,8 +14,6 @@ import '../../themes/default.css';
 import '../../themes/required.css';
 
 
-const apiUrl = "https://revise-app.onrender.com"
-
 
 function Timetable() {
   const [events, setEvents] = useState([]);
@@ -23,10 +21,28 @@ function Timetable() {
   const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
   const [subjects, setSubjects] = useState(subjectsDef)
   const [activeSubjects, setActive] = useState(subjectsDef)
+  const [filteredEvents, setFiltered] = useState(events)
 
   useEffect(() => {
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    const subjects = events.map(event => event.subject)
+    const uniq = [...new Set(subjects)];
+    setSubjects(uniq)
+  }, [events]);
+
+  useEffect(() => {
+    setActive(subjects)
+  }, [subjects]);
+
+  useEffect(() => {
+    console.log('5',activeSubjects)
+    const filtered = events.filter(event=> activeSubjects.includes(event.subject))
+    setFiltered(filtered)
+  }, [activeSubjects]);
+
   const apiUrl = "https://revise-app.onrender.com"
   async function fetchEvents() {
     const options = {
@@ -54,6 +70,9 @@ function Timetable() {
       alert('Unable to fetch events');
     }
   }
+
+
+
   const calendarRef = useRef(null);
   const handleSubmit = (eventName, start, end) => {
     // Prompt for additional data
@@ -63,7 +82,7 @@ function Timetable() {
     const description = prompt('Enter description:');
     const location = prompt('Enter location:');
     const priority = prompt('Enter priority (e.g., H, M, L):');
-    console.log(formattedStart, formattedEnd)
+    //console.log(formattedStart, formattedEnd)
     // Check if the user canceled the prompts
     if (subject === null || description === null || location === null || priority === null) {
       return;
@@ -79,7 +98,7 @@ function Timetable() {
       location,
       priority,
     };
-    console.log(eventData);
+    //console.log(eventData);
     // Post the event data
     postEvent(eventData);
   };
@@ -284,7 +303,7 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
       alert('Unable to update event');
     }
   }
-  console.log(events)
+  //console.log(events)
 
 
 let themeImport
@@ -300,9 +319,9 @@ useEffect( ()=>{
   
   const style = document.getElementsByTagName('style')
 
-  if(style[1]){
-    console.log(style[1])
-    style[1].remove()
+  if(style[2]){
+    console.log(style[2])
+    style[2].remove()
     console.log('style removed')}
 
   async function changeTheme(){
@@ -327,31 +346,35 @@ useEffect(()=>{console.log(subjects)},[subjects])
 
 
   return (
-    <div>
-      <FilterTheme theme = {theme} setTheme = {setTheme}/>
-      <FilterSubject subjects={subjects} setActive={setActive} activeSubjects = {activeSubjects}/>
-      <FullCalendar
-        editable
-        selectable
-        ref={calendarRef}
-        select={handleSelect}
-        events={events}
-        headerToolbar={{
-          start: 'today prev next',
-          end: 'dayGridMonth timeGridWeek timeGridDay',
-        }}
-        initialView="dayGridMonth"
-        eventContent={({ event }) => (
-          <EventCard
-            eventInfo={event}
-            onDelete={deleteEvent}
-            onEdit={update}
-          />
-        )}
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, bootstrap5Plugin]}
-        themeSystem='default'
-        views={['dayGridMonth', 'timeGridWeek', 'timeGridDay']}
-      />
+    <div className='timetable-container'>
+      <div className='side-bar'>
+        <FilterTheme theme = {theme} setTheme = {setTheme}/>
+        <FilterSubject subjects={subjects} setActive={setActive}/>
+      </div>
+      <div className="calendar">
+        <FullCalendar 
+          editable
+          selectable
+          ref={calendarRef}
+          select={handleSelect}
+          events={filteredEvents}
+          headerToolbar={{
+            start: 'today prev next',
+            end: 'dayGridMonth timeGridWeek timeGridDay',
+          }}
+          initialView="dayGridMonth"
+          eventContent={({ event }) => (
+            <EventCard
+              eventInfo={event}
+              onDelete={deleteEvent}
+              onEdit={update}
+            />
+          )}
+          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, bootstrap5Plugin]}
+          themeSystem='default'
+          views={['dayGridMonth', 'timeGridWeek', 'timeGridDay']}
+        />
+      </div>
     </div>
   );
 }
