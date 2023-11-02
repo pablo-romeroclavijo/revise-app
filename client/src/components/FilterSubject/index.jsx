@@ -1,18 +1,24 @@
 import React from "react"
 
-['Maths', 'History', 'English', 'Science', 'Physics']
-
-function FilterSubject({subjects, setSubjects}){
+function FilterSubject({subjects, setActive, activeSubjects}){
 
     function handleFilter(e){
-        console.log(e.target.value)
-        // if(value in subjects){
-        //     subjects.filter(subject => )
-        // }
-        //setSubjects(e.target.value)
+        const value = e.target.value
+        //console.log(value)
+        
+        if(!activeSubjects.find(subject => subject == value)){
+            activeSubjects.push(value)
+            //console.log('here3', activeSubjects)  
+        }
+        else{
+            const index = activeSubjects.findIndex(subject => subject == value)
+            activeSubjects.splice(index)
+           // console.log('here', subjects)
+        }
+        setActive(activeSubjects)
+        
     }
-
-    console.log(subjects)
+    //console.log(activeSubjects)
     return ( 
         <form onChange={handleFilter}>
             {subjects.map(subject => <>
