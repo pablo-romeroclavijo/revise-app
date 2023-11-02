@@ -15,16 +15,23 @@ import '../../themes/required.css';
 
 
 
-function Timetable() {
+function Timetable({linkCode}) {
+  //console.log(linkCode);
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('default')
   const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
   const [subjects, setSubjects] = useState(subjectsDef)
   const [activeSubjects, setActive] = useState(subjectsDef)
+  const [link, setLink] = useState('');
   const [filteredEvents, setFiltered] = useState(events)
 
   useEffect(() => {
-    fetchEvents();
+    if (!linkCode) {
+      fetchEvents();
+    } else {
+      getSharedEvents(apiUrl + "/link/" + linkCode)
+    }
+    
   }, []);
 
   useEffect(() => {
@@ -44,6 +51,7 @@ function Timetable() {
   }, [activeSubjects]);
 
   const apiUrl = "https://revise-app.onrender.com"
+
   async function fetchEvents() {
     const options = {
       method: "GET",
@@ -70,6 +78,29 @@ function Timetable() {
       alert('Unable to fetch events');
     }
   }
+
+
+
+
+
+  async function getSharedEvents(url){
+    const response = await fetch(url)
+    const data = await response.json()
+    if(response.status == 200){
+      const modifiedData = data.map(event => ({
+        ...event,
+        start: event.start_date, 
+        end: event.end_date,    
+      }));
+  
+      setEvents(modifiedData);
+      
+    }else{
+      alert('Unable to fetch shared events')
+    }
+  
+  }
+
 
 
 
@@ -142,6 +173,27 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
     // await fetchEvents();
   }else{
     alert('Unable to delete events')
+  }
+}
+
+async function getShareLink(){    
+  const options  = {
+    method: "GET",
+    headers : {
+      "Authorization": localStorage.token,
+      "Accept": 'application/json',
+      "Content-Type": "application/json"
+    }
+  }
+
+  const response = await fetch(apiUrl +'/link', options)
+  const data = await response.json()
+  if(response.status == 200){
+    //console.log(data);
+    setLink(data.url);
+    
+  }else{
+    alert('Unable to get link')
   }
 }
 
@@ -343,6 +395,10 @@ useEffect(()=>{console.log(subjects)},[subjects])
         <FilterSubject subjects={subjects} setActive={setActive}/>
       </div>
       <div className="calendar">
+
+      <button onClick={getShareLink}>Generate Share Link</button>
+      <input class="linkBox" type="text" value={link} readOnly/>
+
         <FullCalendar 
           editable
           selectable
@@ -364,6 +420,7 @@ useEffect(()=>{console.log(subjects)},[subjects])
           plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, bootstrap5Plugin]}
           themeSystem='default'
           views={['dayGridMonth', 'timeGridWeek', 'timeGridDay']}
+
         />
       </div>
     </div>
