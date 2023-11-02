@@ -24,12 +24,12 @@ const eventArray = [eventDate.getDate(), eventDate.getMonth()]
 
 
 const time = {hour: eventDate.getHours(), minute :eventDate.getMinutes()}
-console.log(time)
+//console.log(time)
 
 
 
 const verify = eventArray[1] == todayArray[1] && eventArray[0] == todayArray[0]
-console.log('hre', event.priority)
+//console.log('hre', event.priority)
 
 const body = (
   <div className='event-card'>

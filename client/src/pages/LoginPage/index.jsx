@@ -23,11 +23,11 @@ function LoginPage() {
     const response = await fetch("https://revise-app.onrender.com/user/login", options);
     const data = await response.json();
     if (response.status == 200) {
-        console.log("ur logged in");
+        //console.log("ur logged in");
         localStorage.setItem("token", data.token)
         navigate("/timetable")
     } else {
-        console.log("ur not logged in");
+        //console.log("ur not logged in");
         alert(data.error);
         navigate("/timetable")
         

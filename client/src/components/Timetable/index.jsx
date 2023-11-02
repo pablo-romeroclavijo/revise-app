@@ -16,7 +16,7 @@ import '../../themes/required.css';
 
 
 function Timetable({linkCode}) {
-  console.log(linkCode);
+  //console.log(linkCode);
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('theme1')
   const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
@@ -47,7 +47,7 @@ function Timetable({linkCode}) {
   }, [subjects]);
 
   useEffect(() => {
-    console.log('5',activeSubjects)
+    //console.log('5',activeSubjects)
     const filtered = events.filter(event=> activeSubjects.includes(event.subject))
     setFiltered(filtered)
   }, [activeSubjects]);
@@ -374,11 +374,11 @@ const themes = {
 useEffect( ()=>{
   
   const style = document.getElementsByTagName('style')
+  //console.log(style)
 
-  // if(style[2]){
-  //   console.log(style[2])
-  //   style[2].remove()
-  //   console.log('style removed')}
+  if(style[5]){
+    //console.log(style[5])
+    style[5].remove()}
 
   async function changeTheme(){
     await import (`../../themes/${themes[theme]}.css`)
@@ -387,8 +387,8 @@ useEffect( ()=>{
   changeTheme()
 },[theme])
 
-useEffect(()=>{console.log(subjects)},[subjects])
-console.log(events)
+useEffect(()=>{},[subjects])
+//console.log(events)
 
   return (
     <div className='timetable-container'>
