@@ -364,7 +364,9 @@ const themes = {
   default:'default',
   theme1: 'theme1',
   theme2:'theme2',
-  theme3: 'theme3'
+  theme3: 'theme3',
+  theme4: 'theme4',
+  theme5: 'theme5'
 }
 //
 
