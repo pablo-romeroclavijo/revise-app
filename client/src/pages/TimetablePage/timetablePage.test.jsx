@@ -11,24 +11,27 @@ import * as matchers from '@testing-library/jest-dom/matchers'
 expect.extend(matchers)
 
 import TimetablePage    from ".";
-import { beforeEach } from "vitest";
+import { afterEach, beforeEach, describe, it } from "vitest";
 import LoginPage from "../LoginPage";
 
 
 
-
-  
-  // Mock the localStorage methods
- 
-  
   describe('timetable', () => {
+   
 
-    it('should navigate to "/" if token is null', () => {
+    beforeEach(() => {
+        render(< BrowserRouter > < TimetablePage/> </BrowserRouter>)
+        localStorage.clear()
+        
+    })
 
-      render(< BrowserRouter > < LoginPage/> </BrowserRouter>)
-    });
+   
   
     it('should navigate to "/timetable" if token is not null', () => {
-      render(< BrowserRouter > < TimetablePage/> </BrowserRouter>)
+        //localStorage.setItem('token', "asdfasdf")
+        
+       // expect(getItemSpy).toHaveBeenCalledTimes(1)
+        render(< BrowserRouter > < TimetablePage/> </BrowserRouter>)
+
     });
   });

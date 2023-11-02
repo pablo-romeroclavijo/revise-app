@@ -15,6 +15,7 @@ describe("NotFound page", () => {
     });
 
     afterEach(() => {
+        localStorage.clear()
         cleanup();
     })
 
@@ -24,4 +25,4 @@ describe("NotFound page", () => {
         expect(elem.textContent).toBe("404: Page not found")
     })
     
-    })
+})
