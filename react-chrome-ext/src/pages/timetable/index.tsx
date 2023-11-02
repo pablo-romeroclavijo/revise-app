@@ -7,6 +7,8 @@ import EventCard from '../../components/eventcard';
 
 const TimetablePage = () => {
 
+
+
   async function fetchEvents(){
     const options  = {
       method: "GET",
@@ -19,6 +21,7 @@ const TimetablePage = () => {
     const response = await fetch(apiUrl +'/event', options)
     const data = await response.json()
     if(response.status == 200){
+  
       setEvents(data)
     }else{
       alert('Unable to fetch events')
@@ -30,13 +33,12 @@ const TimetablePage = () => {
 
   useEffect(() => {
       fetchEvents()//request event data
-      //console.log(events)
   }, []);
 
 
   return (
     <>
-        {console.log('aa', events)}
+        {events.map(event => console.log(event))}
         <h1>Your schedule for the day:</h1>
         <div className='event-card-container'>
           {!events ? <p>Loading...</p> : events.map(event => <EventCard event={event}/>)}
