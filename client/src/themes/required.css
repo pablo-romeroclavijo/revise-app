@@ -30,7 +30,6 @@
     
 }
 .event-card{
- 
    width: 100%;
    border-radius: 10px;
    padding-bottom: 5px;}
@@ -75,7 +74,8 @@
  }
 
  .linkBox {
-   width: 300px;
+   width: 100%;
+   overflow: hidden;
  }
 
  

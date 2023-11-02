@@ -57,7 +57,9 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
   const time = {hour: eventDate.getHours(), minute :eventDate.getMinutes()}
 
   return (
+    
     <div className='event-card'>
+     
       <div onClick={handleEdit} className='row' style={styles}>
         <h3>{time.hour}:{time.minute == 0 ? "00" : time.minute}</h3>
         <h3>{eventInfo.title}</h3>

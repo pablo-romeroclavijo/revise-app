@@ -388,7 +388,7 @@ useEffect( ()=>{
 },[theme])
 
 useEffect(()=>{console.log(subjects)},[subjects])
-
+console.log(events)
 
   return (
     <div className='timetable-container'>
@@ -396,7 +396,7 @@ useEffect(()=>{console.log(subjects)},[subjects])
         <FilterTheme theme = {theme} setTheme = {setTheme}/>
         <FilterSubject subjects={subjects} setActive={setActive}/>
         <button onClick={getShareLink}>Generate Share Link</button>
-        <input class="linkBox" type="text" value={link} readOnly style= {{width:"250px"}} />
+        <input class="linkBox" type="text" value={link} readOnly style= {{width:"90%", marginRight:"20px"}} />
       </div>
       <div className="calendar">
 
