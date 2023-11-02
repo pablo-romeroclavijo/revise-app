@@ -20,7 +20,7 @@ describe('eventController',() => {
             mockEvents = [
                 {
                     user_id: 4,
-                    start_date: '2023-iu11-06 10:30:00',
+                    start_date: '2023-11-06 10:30:00',
                     end_date : '2023-11-06 11:00:00', 
                     title : 'Meeting',
                     description: 'Discuss project progress', 
