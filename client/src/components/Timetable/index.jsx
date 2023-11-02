@@ -371,21 +371,23 @@ const themes = {
 }
 //
 
-useEffect( ()=>{
-  
-  const style = document.getElementsByTagName('style')
-  //console.log(style)
+useEffect(() => {
+  async function changeTheme() {
+    const style = document.getElementsByTagName('style');
 
-  if(style[5]){
-    //console.log(style[5])
-    style[5].remove()}
+    const themeImport = await import(`../../themes/${themes[theme]}.css`);
+    const styleElement = document.createElement('style');
+    styleElement.appendChild(document.createTextNode(themeImport.default));
+    
+    if (style.length > 4) {
+      style[style.length - 1].remove();
+    }
 
-  async function changeTheme(){
-    await import (`../../themes/${themes[theme]}.css`)
-   
+    document.head.appendChild(styleElement);
   }
-  changeTheme()
-},[theme])
+
+  changeTheme();
+}, [theme]);
 
 useEffect(()=>{},[subjects])
 //console.log(events)
