@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 import {EventCard, FilterTheme, FilterSubject} from '../index'
 
 import { Theme } from '@fullcalendar/core/internal';
-import '../../themes/default.css';
+//import '../../themes/default.css';
 import '../../themes/required.css';
 
 
@@ -18,7 +18,7 @@ import '../../themes/required.css';
 function Timetable({linkCode}) {
   //console.log(linkCode);
   const [events, setEvents] = useState([]);
-  const [theme, setTheme] = useState('default')
+  const [theme, setTheme] = useState('theme1')
   const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
   const [subjects, setSubjects] = useState(subjectsDef)
   const [activeSubjects, setActive] = useState(subjectsDef)
@@ -394,11 +394,12 @@ useEffect(()=>{console.log(subjects)},[subjects])
       <div className='side-bar'>
         <FilterTheme theme = {theme} setTheme = {setTheme}/>
         <FilterSubject subjects={subjects} setActive={setActive}/>
+        <button onClick={getShareLink}>Generate Share Link</button>
+        <input class="linkBox" type="text" value={link} readOnly style= {{width:"250px"}} />
       </div>
       <div className="calendar">
 
-      <button onClick={getShareLink}>Generate Share Link</button>
-      <input class="linkBox" type="text" value={link} readOnly/>
+      
 
         <FullCalendar 
           editable={isUser}
