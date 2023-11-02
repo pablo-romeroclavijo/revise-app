@@ -11,8 +11,8 @@ const App = () => {
         <Route path="/signup" element={<SignUpPage />}/>
         <Route path='/timetable' element={<NavBar/>}>
           <Route index element={<TimetablePage />}/>
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
         
     </Routes>
   </>

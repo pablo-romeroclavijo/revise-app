@@ -20,11 +20,14 @@ function FilterSubject({subjects, setActive}){
     return ( 
         
         <form onChange={handleFilter} id='subject-form'>
-            {subjects.map(subject => <>
-                <label htmlFor={subject}>{subject}</label> 
+            <h3>Filter by subject:</h3>
+            <ul>
+            {subjects.map(subject => <li>
                 <input type='checkbox' className='subjects' value={subject} name={subject} defaultChecked />
-                </>
+                <label htmlFor={subject}>{subject}</label> 
+                </li>
              )}
+             </ul>
         </form> );
 }
 

@@ -9,7 +9,8 @@ function FilterTheme({theme, setTheme}){
 
     return ( 
         <div className="select">
-            <label htmlFor='typeFilter'>Custom Theme: </label>
+            <h3>Customize yoy calendar:</h3>
+            <label htmlFor='typeFilter'>Theme: </label>
             <select  onChange={handleFilter} id="typeFilter" defaultValue={theme}>
                 <option value="default" className="type">Default</option>
                 <option value="theme1" className="type">Theme 1</option>
