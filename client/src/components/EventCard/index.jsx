@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 //import EditPopup from '../EditPopup';
+const styles = ({ paddingLeft: 10, paddingRight: 0});
 
 const EventCard = ({ eventInfo, onDelete, onEdit }) => {
   //console.log(eventInfo.extendedProps) 
@@ -41,7 +42,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
 
   return (
     <div className='event-card'>
-      <div onClick={handleEdit} className='test'>
+      <div onClick={handleEdit} className='test' style={styles}>
         <h3>{eventInfo.title}</h3>
         {/* <p>Subject: {eventInfo.extendedProps.subject}</p>
         <p>Description: {eventInfo.extendedProps.description}</p>
