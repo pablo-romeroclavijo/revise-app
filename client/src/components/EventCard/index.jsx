@@ -43,12 +43,12 @@ const EventCard = ({ eventInfo, onDelete, onEdit }) => {
     <div className='event-card'>
       <div onClick={handleEdit} className='test'>
         <h3>{eventInfo.title}</h3>
-        <p>Subject: {eventInfo.extendedProps.subject}</p>
+        {/* <p>Subject: {eventInfo.extendedProps.subject}</p>
         <p>Description: {eventInfo.extendedProps.description}</p>
         <p>Location: {eventInfo.extendedProps.location}</p>
         <p>Priority: {eventInfo.extendedProps.priority}</p>
         <p>Start: {start.toLocaleString()}</p>
-        <p>End: {end.toLocaleString()}</p>
+        <p>End: {end.toLocaleString()}</p> */}
         
         
       </div>
