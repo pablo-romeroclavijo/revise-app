@@ -3,27 +3,22 @@ import { Timetable, FilterTheme } from '../../components';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const apiUrl = "https://revise-app.onrender.com"
-const TimetablePage = () => {
+const SharedPage = () => {
   
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const token = localStorage.getItem('token');
+  const {id} = useParams();
   
   
-  useEffect(() => {
-    if (token === null) {
-      navigate('/');
-    } else {
-      navigate('/timetable');
-    }
-  }, [token, navigate]);
+  
 //console.log(events)
   return (
     <>
 
-      <Timetable events={events} setEvents={setEvents} />
+      <Timetable events={events} setEvents={setEvents} linkCode={id}/>
     </>
   );
 };
 
-export default TimetablePage;
+export default SharedPage;

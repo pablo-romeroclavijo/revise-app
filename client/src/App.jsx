@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
-import {TimetablePage, LoginPage, NotFoundPage, SignUpPage} from './pages'
+import {TimetablePage, LoginPage, NotFoundPage, SignUpPage, SharedPage} from './pages'
 const App = () => {
   return(
   <>
@@ -11,6 +11,7 @@ const App = () => {
         <Route path="/" element={<LoginPage />}/>
         <Route path="/signup" element={<SignUpPage />}/>
         <Route path="/timetable" element={<TimetablePage />}/>
+        <Route path="/timetable/:id" element={<SharedPage />}/>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

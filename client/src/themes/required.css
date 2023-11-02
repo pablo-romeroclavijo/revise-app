@@ -38,3 +38,23 @@
  .hideEvent {
     display: none;
  }
+
+
+ .linkBox {
+   width: 300px;
+ }
+ /* body {
+    background-image: 
+        linear-gradient(45deg, red, yellow),
+        linear-gradient(135deg, yellow, green),
+        linear-gradient(225deg, green, blue),
+        linear-gradient(315deg, blue, red);
+    background-attachment: fixed;
+    
+   
+ }
+
+ .fc-media-screen {
+    background-color: rgb(0, 255, 13);
+    border-radius: 15px;
+ } */
