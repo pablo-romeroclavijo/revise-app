@@ -11,7 +11,7 @@ const NavBar = () => {
             </nav>
             <Outlet/>
         </header>
-        <footer>CalendarApp</footer>
+        
     </>
 };
 
