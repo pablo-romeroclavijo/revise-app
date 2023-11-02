@@ -10,7 +10,8 @@ import { v4 as uuid } from 'uuid';
 import {EventCard, FilterTheme, FilterSubject} from '../index'
 
 import { Theme } from '@fullcalendar/core/internal';
-import '../../themes/default.css'
+import '../../themes/default.css';
+import '../../themes/required.css';
 
 
 const apiUrl = "https://revise-app.onrender.com"
