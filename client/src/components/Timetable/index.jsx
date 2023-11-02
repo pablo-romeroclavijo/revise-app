@@ -379,7 +379,7 @@ useEffect(() => {
     const styleElement = document.createElement('style');
     styleElement.appendChild(document.createTextNode(themeImport.default));
     
-    if (style.length > 4) {
+    if (style.length > 1) {
       console.log("more than 4", style.length);
       await style[style.length - 1].remove();
     }
