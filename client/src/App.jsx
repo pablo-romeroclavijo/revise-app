@@ -8,12 +8,12 @@ const App = () => {
     
 
     <Routes>
+      <Route path="/">
+        <Route path="/" element={<LoginPage />}/>
         <Route path="/signup" element={<SignUpPage />}/>
-        <Route path='/timetable' element={<NavBar/>}>
-          <Route index element={<TimetablePage />}/>
-        </Route>
+        <Route path="/timetable" element={<TimetablePage />}/>
         <Route path="*" element={<NotFoundPage />} />
-        
+      </Route>
     </Routes>
   </>
   )
