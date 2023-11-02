@@ -5,11 +5,12 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
-
+import path from 'path-browserify'
 import { v4 as uuid } from 'uuid';
 import {EventCard, FilterTheme, FilterSubject} from '../index'
 
 import { Theme } from '@fullcalendar/core/internal';
+import '../../themes/theme0.css'
 
 
 const apiUrl = "https://revise-app.onrender.com"
@@ -287,18 +288,33 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
 
 let themeImport
 const themes = {
-  default:'default',
+  default:'theme0',
   theme1: 'theme1',
   theme2:'theme2',
   theme3: 'theme3'
 }
+//
 
 useEffect( ()=>{
+  
   const style = document.getElementsByTagName('style')
-  console.log(style)
+  //console.log(style[1].getAttribute('data-vite-dev-id'))
+  //console.log(style[1].id)
+  // if(style[1]){
+  //   console.log(style[1])
+  //   console.log(style[1].getAttribute('data-vite-dev-id'))
+  //   style[1].remove()
+  //   console.log('style removed')}
+
   async function changeTheme(){
-    console.log(theme)
-    themeImport = await import (`../../themes/${themes[theme]}.css`)
+    // console.log(theme)
+    // const path = style[1].getAttribute('data-vite-dev-id')
+    // console.log('path:',path)
+    // const newPath = path.substring(0, path.lastIndexOf('/'));
+    // console.log('path2:', newPath)
+    // await style[1].setAttribute('data-vite-dev-id',)
+    // await import (`../../themes/${themes[theme]}.css`)
+    // console.log(themeImport)
   }
   changeTheme()
 },[theme])
