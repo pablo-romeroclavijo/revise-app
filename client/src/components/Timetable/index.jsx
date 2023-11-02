@@ -319,23 +319,12 @@ useEffect( ()=>{
   
   const style = document.getElementsByTagName('style')
 
-  if(style[2]){
-    console.log(style[2])
-    style[2].remove()
-    console.log('style removed')}
+  // if(style[2]){
+  //   console.log(style[2])
+  //   style[2].remove()
+  //   console.log('style removed')}
 
   async function changeTheme(){
-    // const path = style[1].getAttribute('data-vite-dev-id')
-    // const newPath = path.substring(0, path.lastIndexOf('/')) + '/' + themes[theme] + '.css';
-    // const documentStyles = fs.readFileSync(newPath)
-    // console.log(documentStyles)
-    // console.log(theme)
-    // style[1].innerHTML = ''
-    // const path = style[1].getAttribute('data-vite-dev-id')
-    // console.log('path:',path)
-    // const newPath = path.substring(0, path.lastIndexOf('/')) + '/' + themes[theme] + '.css';
-    // console.log('path2:', newPath)
-    // await style[1].setAttribute('data-vite-dev-id', newPath)
     await import (`../../themes/${themes[theme]}.css`)
    
   }
