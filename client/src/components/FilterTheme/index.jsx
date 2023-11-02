@@ -12,9 +12,8 @@ function FilterTheme({theme, setTheme}){
             <h3>Customize your calendar:</h3>
             <label htmlFor='typeFilter'>Theme: </label>
             <select  onChange={handleFilter} id="typeFilter" defaultValue={theme}>
-                <option value="default" className="type">Default</option>
-                <option value="theme1" className="type">Theme 1</option>
-                <option value="theme2" className="type">Theme 2</option>
+                <option value="theme1" className="type">Default</option>
+                <option value="theme2" className="type">Peach</option>
                 <option value="theme3" className="type">Jester</option>
                 <option value="theme4" className="type">Smoke</option>
                 <option value="theme5" className="type">Butter</option>

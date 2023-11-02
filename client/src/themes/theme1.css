@@ -6,15 +6,29 @@
   } 
   .side-bar{
     float:left;
+    margin-top: 65px;
     width: 15%;
     color: #073B4C;
     background-color: #06D6A0;
     font-family: 'Jost', sans-serif;
     margin-right: 15px;
+    margin-left: 10px;
     height: 500px;
     border-radius: 15px;
-    padding: 20px
+    padding-left: 20px;
+    padding-top: 10px;
 
+}
+
+.fc-event {background-color: #06D6A0;}
+
+.side-bar ul{
+    list-style-type: none;
+}
+
+.side-bar label{
+    font-size: 20px;
+    margin-left: 15px;
 }
 
   :root {
