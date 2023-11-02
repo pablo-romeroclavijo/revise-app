@@ -29,17 +29,17 @@ console.log(time)
 
 
 const verify = eventArray[1] == todayArray[1] && eventArray[0] == todayArray[0]
-console.log(event)
+console.log('hre', event.priority)
+
 const body = (
   <div className='event-card'>
   <div className="row">
     <h3>{time.hour}:{time.minute == 0 ? "00" : time.minute}</h3>
     <h3>{title}</h3>
+    <p>{subject}</p>
+
   </div>
-  <div className="row">
-    <p>Subject: {subject}</p>
-    <p>Priority: {!event["priority"] ? 'Standard': event["priority"]}</p>
-  </div>
+
   <br></br>
 </div>
 )
