@@ -30,7 +30,7 @@ const TimetablePage = () => {
 
   useEffect(() => {
       fetchEvents()//request event data
-      console.log(events)
+      //console.log(events)
   }, []);
 
 

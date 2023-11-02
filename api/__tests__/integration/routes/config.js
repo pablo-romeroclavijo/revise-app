@@ -8,13 +8,13 @@ dotenv.config()
 const reset = fs.readFileSync(__dirname + '/reset.sql').toString();
 // console.log(reset)
 // console.log(process.env.DB_TEST_URL)
-
 const resetTestDB = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const db = new Pool({
         connectionString: process.env.DB_TEST_URL
       });
+      console.log(db.query(reset))
       await db.query(reset)
       resolve('Test DB reset')
     

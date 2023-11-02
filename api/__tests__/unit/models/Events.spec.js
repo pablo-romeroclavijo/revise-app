@@ -1,8 +1,6 @@
 const Event = require('../../../models/Events')
 const db = require('../../../database/connect')
 const { response } = require('../../../app')
-const { describe } = require('node:test')
-
 describe('Events',() => {
     beforeEach(() => jest.clearAllMocks())
 
