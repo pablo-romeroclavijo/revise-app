@@ -21,7 +21,9 @@ function LoginPage() {
 
 
     const response = await fetch("https://revise-app.onrender.com/user/login", options);
+    console.log("ok3")
     const data = await response.json();
+   
     if (response.status == 200) {
         console.log("ur logged in");
         localStorage.setItem("token", data.token)

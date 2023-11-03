@@ -18,20 +18,44 @@ import LoginPage from "../LoginPage";
 
   describe('timetable', () => {
    
+    const getItemSpy = vi.spyOn(Storage.prototype, 'getItem')
+    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem')
 
     beforeEach(() => {
-        render(< BrowserRouter > < TimetablePage/> </BrowserRouter>)
-        localStorage.clear()
+      render(< BrowserRouter > < TimetablePage/> </BrowserRouter>)
+      localStorage.clear()
+      getItemSpy.mockClear()
+      setItemSpy.mockClear()
         
     })
 
    
-  
-    it('should navigate to "/timetable" if token is not null', () => {
-        //localStorage.setItem('token', "asdfasdf")
+   
+    afterEach(() => {
         
-       // expect(getItemSpy).toHaveBeenCalledTimes(1)
-        render(< BrowserRouter > < TimetablePage/> </BrowserRouter>)
-
     });
+
+    
+
+    
+  
+  
+    it('should navigate to "/" if token is  null', () => {
+      // const mockResponse = {
+      //   "token" : "asdfqwer"
+      // }
+      // const mockResolveValue = { 
+      //   ok: true,
+      //   json: () => new Promise((resolve) => resolve(mockResponse))
+      // };
+      // fetchSpy.mockReturnValue(mockResolveValue);
+      //localStorage.setItem("token", "asdfasdf")
+        
+       // expect(getItemSpy).toHaveBeenCalledTimes(1) 
+      // expect(getItemSpy).toHaveBeenCalledWith("token")
+
+       expect(window.location.href).toEqual('http://localhost:3000/');
+    });
+
+
   });

@@ -11,6 +11,8 @@ import { expect } from 'vitest'
 expect.extend(matchers)
 
 import  LoginPage   from ".";
+import TimetablePage from "../TimetablePage";
+import { stringify } from "uuid";
 
 
 
@@ -18,9 +20,12 @@ describe("Login page", () => {
 
     const getItemSpy = vi.spyOn(Storage.prototype, 'getItem')
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem')
-
+    //Spy on the global fetch function
+    const fetchSpy = vi.spyOn(global, 'fetch');
+    
     beforeEach(() => {
-    render(< BrowserRouter > < LoginPage/> </BrowserRouter>)
+        render(< BrowserRouter > < LoginPage/> </BrowserRouter>)
+        fetchSpy.mockRestore();
     });
 
     afterEach(() => {
@@ -52,10 +57,18 @@ describe("Login page", () => {
         fireEvent.change(userName, { target: { value: 'testuser' } });
         fireEvent.change(password, { target: { value: 'testpassword' } });
 
-        fireEvent.click(loginButton);   
+        fireEvent.click(loginButton);
 
-        // await screen.findByText("ur not logged in");
-
+        const mockResponse = {
+            "token": "asdf",      
+        }
+        const mockResolveValue = { 
+            ok: true,
+            json: () => new Promise((resolve) => resolve(mockResponse))
+        };
+        fetchSpy.mockReturnValue(mockResolveValue);
+        localStorage.setItem("token", JSON.stringify([mockResponse]))
+        render(<BrowserRouter><TimetablePage /></BrowserRouter>)
         // // Assert that the alert message is displayed
         // expect(screen.getByText("ur not logged in")).toBeInTheDocument();
     })
