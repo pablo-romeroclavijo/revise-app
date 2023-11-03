@@ -3,11 +3,14 @@ import React, { useState, useEffect } from 'react';
 const apiUrl = "https://revise-app.onrender.com"
 import EventCard from '../../components/eventcard';
 
+type TimetableProps = {
+  handleLogout : any
+}
 
 
-const TimetablePage = () => {
+const TimetablePage  : React.FunctionComponent<TimetableProps> = (props) => {
 
-
+  const{handleLogout} = props
 
   async function fetchEvents(){
     const options  = {
@@ -36,6 +39,8 @@ const TimetablePage = () => {
   }, []);
 
 
+
+
   return (
     <>
         
@@ -43,6 +48,7 @@ const TimetablePage = () => {
         <div className='event-card-container'>
           {!events ? <p>Loading...</p> : events.map(event => <EventCard event={event}/>)}
         </div>
+        <button onClick={handleLogout} style = {{backgroundColor:'#ffa892', margin: '15px'}}>Logout</button>
     </>
   );
 };

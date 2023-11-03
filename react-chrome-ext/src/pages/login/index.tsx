@@ -4,8 +4,14 @@ import {Link} from 'react-router-dom'
 import { redirect, useNavigate } from 'react-router-dom';
 
 
+type LoginProps = {
+  setToken : any
+}
+const LoginPage : React.FunctionComponent<LoginProps> = (props) => {
 
-function LoginPage() {
+  const{setToken} = props
+
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('')
@@ -30,6 +36,7 @@ function LoginPage() {
     const data = await response.json();
     if (response.status == 200) {
         console.log("ur logged in");
+        setToken(data.token)
         localStorage.setItem("token", data.token)
         setError('Logged in')
     } else {
