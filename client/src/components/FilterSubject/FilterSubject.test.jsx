@@ -8,23 +8,24 @@ import * as matchers from '@testing-library/jest-dom/matchers'
 
 expect.extend(matchers)
 
-import Timetable    from ".";
 import { describe, it } from "vitest";
 import { beforeEach } from "node:test";
+import FilterSubject from ".";
 
-describe('TimeTable', () => { 
-    const fetchSpy = vi.spyOn(global, 'fetch');
+describe('FilterSubject', () => { 
+   
 
     beforeEach(() => {
-        render( <BrowserRouter > <Timetable/> </BrowserRouter>)
+        render( <BrowserRouter > <FilterSubject/> </BrowserRouter>)
     } )
     
     afterEach(() => {
-        fetchSpy.mockRestore();
+        cleanup()
     });
 
     it('should load',() => {
-       
+        
+
         
     })
 

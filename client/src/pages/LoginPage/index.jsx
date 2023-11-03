@@ -19,11 +19,11 @@ function LoginPage() {
         })
     }
 
-
+    console.log("oklogin")
     const response = await fetch("https://revise-app.onrender.com/user/login", options);
     console.log("ok3")
     const data = await response.json();
-   
+    console.log("response ", response)
     if (response.status == 200) {
         //console.log("ur logged in");
         localStorage.setItem("token", data.token)
@@ -56,7 +56,7 @@ function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
-      <a onClick={handleSignUp}>Don't have account click here</a>
+      <button onClick={handleSignUp}>No Account</button>
     </div>
   );
 }

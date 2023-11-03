@@ -5,12 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 import * as matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
-import Header from '.';
+import NavBar from '.';
 import { describe } from 'vitest';
 
 describe("navBar",() => {
     beforeEach(() => {
-        render(<BrowserRouter><Header /></BrowserRouter>);
+        render(<BrowserRouter><NavBar /></BrowserRouter>);
     });
 
     afterEach(() => {
