@@ -57,7 +57,9 @@
    height: 150px;
 }
 
-
+#root > header > nav > a {
+   padding: 10px;
+ }
 
 /*scroll bar and whatnot*/
 ::-webkit-scrollbar {
