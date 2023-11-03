@@ -19,6 +19,6 @@ describe("navBar",() => {
     it('the heading has the appropriate amount of links', () => {
         const navigation = screen.getByRole('navigation');
         expect(navigation).toBeInTheDocument();
-        expect(navigation.children.length).toBe(2)
+        expect(navigation.children.length).toBe(3)
     });
 } )
