@@ -21,6 +21,10 @@
 
     }
 
+    .edit-popup {
+        background-color: #E35734 !important;
+       }
+
   :root {
     --fc-small-font-size: .85em;
     --fc-today-bg-color : rgb(231, 111, 81, 0.15);

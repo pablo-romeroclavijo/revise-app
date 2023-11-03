@@ -48,6 +48,10 @@
     box-sizing: border-box;
   } 
 
+  .edit-popup {
+    background-color: #588157 !important;
+   }
+
   .fc .fc-daygrid-day-frame  { 
     min-height: 100%; 
     position: relative;

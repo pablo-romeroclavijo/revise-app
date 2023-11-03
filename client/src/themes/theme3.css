@@ -84,6 +84,10 @@
   .fc *  { 
       box-sizing: border-box;
   } 
+
+  .edit-popup {
+    background-color: #f72585 !important;
+   }
   
   .fc-toolbar-title {
     color: #f72585;

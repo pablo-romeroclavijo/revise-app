@@ -35,6 +35,10 @@
     --fc-button-text-color: #264653;
     background-color: #edebf2;
   } 
+
+  .edit-popup {
+    background-color: #f72585 !important;
+   }
   
   .fc { 
     display: flex;
