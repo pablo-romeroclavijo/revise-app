@@ -21,6 +21,9 @@
 
     }
 
+    ::-webkit-scrollbar-thumb {
+        background-color: #f72585}
+
     .edit-popup {
         position: absolute;
         top: 50%; /* Adjust this value to center the popup vertically */
@@ -45,7 +48,7 @@
       #root > header > nav > a {
         font-family: 'Pixelify Sans', sans-serif;
         color: #264653;
-        background-color: #f72585 !important;
+        background-color: #f72585;
         border-radius: 10px;
         margin: 10px;
       }
@@ -115,10 +118,10 @@
   } 
 
   button {
-    background-color: #4cc9f0;
+    background-color: #4cc9f0 ;
     border-color: transparent;
     margin: 3px;
-    color: #073B4C;
+    color: #3f37c9;
     border-radius: 3px;
     font-family: 'Pixelify Sans', sans-serif;
   }

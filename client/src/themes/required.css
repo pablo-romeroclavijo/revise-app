@@ -20,7 +20,9 @@
     display: flex;
     flex-direction: column;
   }
-
+ html{
+   margin-top: 15px;
+ }
 
 .fc {
     margin-top: 70px !important;

@@ -10,12 +10,17 @@
     width: 15%;
     margin-top: 65px;
     background-color: #f72585;;
+
     margin-right: 15px;
     margin-left: 10px;
     height: 500px;
     border-radius: 15px;
     padding-left: 20px;
     padding-top: 10px;
+    }
+
+    h3 h2{
+        color: #3f37c9;
     }
 
     .edit-popup {
@@ -39,8 +44,14 @@
 
       }
 
+      ::-webkit-scrollbar-thumb {
+        background-color: #f72585
+    
+    
+    }
+
       button {
-        background-color: #f72585 !important;
+        background-color: #4cc9f0 ;
         border-color: transparent;
         margin: 3px;
         color: #3f37c9;
@@ -51,7 +62,7 @@
       #root > header > nav > a {
         font-family: 'Pixelify Sans', sans-serif;
         color: #3f37c9;
-        background-color: #f72585 !important;
+        background-color: #f72585;
         border-radius: 10px;
         margin: 10px;
       }
@@ -59,7 +70,7 @@
       #root > header > div > div.calendar > div > div> div > table > tbody > tr > td > div > div > div > table > tbody > tr > td.fc-day > div > div.fc-daygrid-day-events > div> a > div > div.overlay > div > button,
       #root > header > div > div.calendar > div > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr.fc-scrollgrid-section.fc-scrollgrid-section-body.fc-scrollgrid-section-liquid > td > div > div > div > div.fc-timegrid-cols > table > tbody > tr > td.fc-day > div > div > div > a > div.fc-event-main > div > div.overlay > div > button
       {
-        background-color: #f72585 !important;
+        background-color: #4cc9f0;
         border-color: transparent;
         margin: 3px;
         color: #3f37c9;

@@ -19,7 +19,16 @@
     padding-left: 20px;
     padding-top: 10px;
 
-    }
+}
+::-webkit-scrollbar-thumb {
+    background-color: #E35734
+
+}
+
+h3 h2{
+    color: #264653
+   
+}
 
     .edit-popup {
         position: absolute;
@@ -50,12 +59,15 @@
         margin: 10px;;
       }
 
+      .fc .fc-scrollgrid-sync-inner{
+        background-color: #fcf8eb;
+      }
       
 
       #root > header > div > div.calendar > div > div> div > table > tbody > tr > td > div > div > div > table > tbody > tr > td.fc-day > div > div.fc-daygrid-day-events > div> a > div > div.overlay > div > button,
       #root > header > div > div.calendar > div > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr.fc-scrollgrid-section.fc-scrollgrid-section-body.fc-scrollgrid-section-liquid > td > div > div > div > div.fc-timegrid-cols > table > tbody > tr > td.fc-day > div > div > div > a > div.fc-event-main > div > div.overlay > div > button
       {
-        background-color: #E35734;
+        background-color: #f4a261;
         border-color: transparent;
         margin: 3px;
         color: #264653;
@@ -68,7 +80,7 @@
       }
 
       button {
-        background-color: #E35734;
+        background-color: #f4a261;
         border-color: transparent;
         margin: 3px;
         color: #264653;
