@@ -25,6 +25,9 @@ function Timetable({linkCode}) {
   const [link, setLink] = useState('');
   const [filteredEvents, setFiltered] = useState(events)
   const [isUser, setIsUser] = useState(false);
+  const [isNew, setIsNew] = useState(false);
+  const [newEvent, setNewEvent] = useState({title: "", start: "", end: "", description: "", priority: "", subject: "", location: ""});
+
   let linkCodeNew = linkCode;
   useEffect(() => {
     if (!linkCode) {
@@ -83,6 +86,26 @@ function Timetable({linkCode}) {
 
 
 
+  function onCancel() {
+    //document.body.style.backgroundColor = "#7F0909";
+    const elements = document.querySelectorAll('.test');
+    const elementsEvents = document.querySelectorAll('.fc-event');
+
+
+    elements.forEach(element => {
+      element.classList.remove('hideEvent');
+    });
+
+    
+    elementsEvents.forEach(element => {
+      element.classList.remove('hideColour');
+    });
+    setIsNew(false);
+    
+    
+  }
+
+
 
 
   async function getSharedEvents(url){
@@ -131,10 +154,43 @@ function Timetable({linkCode}) {
       location,
       priority,
     };
-    //console.log(eventData);
+    console.log(eventData);
     // Post the event data
     postEvent(eventData);
   };
+
+  const handleSubmit2 = (newEvent) => {
+    console.log("newEvent", newEvent);
+    const start = newEvent.start;
+    const end = newEvent.end;
+    const title = newEvent.title;
+    const subject = newEvent.subject;
+    const description = newEvent.description;
+    const location = newEvent.location;
+    const priority = newEvent.priority;
+    // Check if the user canceled the prompts
+    if (subject === null || description === null || location === null || priority === null) {
+      return;
+    }
+  
+    // Create the event data
+    const eventData = {
+      title: title,
+      start_date:start,
+      end_date:end,
+      subject: subject,
+      description: description,
+      location: location,
+      priority: priority,
+    };
+   
+    // Post the event data
+    console.log("event data", eventData);
+    postEvent(eventData);
+    setIsNew(false);
+  };
+
+
   const postEvent = async (data) => {
     const options = {
       method: "POST",
@@ -174,7 +230,7 @@ async function updateTime(event){    //event = {event_id, end_date, start_date}
     // setEvents(data);
     // await fetchEvents();
   }else{
-    alert('Unable to delete events')
+    
   }
 }
 
@@ -249,6 +305,29 @@ async function getShareLink(){
     calendarRef.current.getApi().on('view', handleViewChange);
     
   }, [events]);
+
+
+  function handleSelect2(info) {
+
+    const elements = document.querySelectorAll('.test');
+    const elementsEvents = document.querySelectorAll('.fc-event');
+    
+    
+
+    elements.forEach(element => {
+    element.classList.add('hideEvent');
+    });
+
+    elementsEvents.forEach(element => {
+      element.classList.add('hideColour');
+      });
+
+    console.log("info", info);
+    const {start} = info;
+    setIsNew(true);
+    
+  }
+
 
   const handleSelect = (info) => {
     const { start } = info;
@@ -415,6 +494,85 @@ function copyToClipboard(){
           <button onClick={copyToClipboard}>Copy Link</button>
           </>
         )}
+
+
+        
+
+
+      {isNew && isUser && (
+        <div className="overlay">
+          <div className="edit-popup">
+            <h3>New Event</h3>
+
+
+            <label htmlFor="eventTitle">Event Title:</label>
+            <input
+              type="text"
+              id="eventTitle"
+              
+              onChange={(e) => setNewEvent({  ...newEvent, title: e.target.value })}
+            />
+
+
+            <label htmlFor="eventSubject">Event Subject:</label>
+            <input
+              type="text"
+              id="eventSubject"             
+              
+              onChange={(e) => setNewEvent({  ...newEvent, subject: e.target.value })}
+            />
+
+            <label htmlFor="eventStart">Event Start:</label>
+            <input
+              type="datetime-local"
+              id="eventStart"             
+              
+              onChange={(e) => setNewEvent({  ...newEvent, start: e.target.value })}
+            />
+
+            <label htmlFor="eventEnd">Event End:</label>
+            <input
+              type="datetime-local"
+              id="eventEnd"             
+              
+              onChange={(e) => setNewEvent({  ...newEvent, end: e.target.value })}
+            />
+
+            <label htmlFor="eventDescription">Event Description:</label>
+            <input
+              type="text"
+              id="eventDescription"             
+              
+              onChange={(e) => setNewEvent({  ...newEvent, description: e.target.value })}
+            />
+
+            <label htmlFor="eventLocation">Event Location:</label>
+            <input
+              type="text"
+              id="eventLocation"             
+              
+              onChange={(e) => setNewEvent({ ...newEvent, location: e.target.value })}
+            />
+
+            <label htmlFor="eventPriority">Event Priority:</label>
+            <input
+              type="text"
+              id="eventPriority"             
+              
+              onChange={(e) => setNewEvent({  ...newEvent, priority: e.target.value })}
+            />
+
+
+            {/* Add more input fields for editing */}
+            <button onClick={() => handleSubmit2(newEvent)}>Add</button>
+            <button onClick={onCancel}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+
+
+
         
         
 
@@ -427,7 +585,7 @@ function copyToClipboard(){
           editable={isUser}
           selectable={isUser}
           ref={calendarRef}
-          select={handleSelect}
+          select={handleSelect2}
           events={filteredEvents}
           headerToolbar={{
             start: 'today prev next',
