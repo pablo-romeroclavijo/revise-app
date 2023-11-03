@@ -380,7 +380,7 @@ useEffect(() => {
 
     // Load the new theme
 
-    const themeImport = await import(`../../themes/${themes[theme]}.css?v=`);
+    const themeImport = await import(`../../themes/${themes[theme]}.css?`);
   
     const styleElement = document.createElement('style');
     styleElement.setAttribute('data-theme-style', ''); // Add a data attribute
