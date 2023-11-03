@@ -74,6 +74,12 @@
         color: #3f37c9;
     }
 
+    .fc-timegrid-slots {
+        color: #3f37c9;
+        background-color: #4cc9f0;
+        font-weight: bold;
+    }
+
      /* edit event card coloyr */
      .fc-event {
         background-color: rgb(247, 37, 133, 0.5);
@@ -107,6 +113,15 @@
     font-family: 'Pixelify Sans', sans-serif;
     box-sizing: border-box;
   } 
+
+  button {
+    background-color: #4cc9f0;
+    border-color: transparent;
+    margin: 3px;
+    color: #073B4C;
+    border-radius: 3px;
+    font-family: 'Pixelify Sans', sans-serif;
+  }
   
   .fc { 
       box-sizing: border-box;

@@ -94,6 +94,14 @@
         border-radius: 3px;
       }
 
+      button {
+        background-color: #06D6A0;
+        border-color: transparent;
+        margin: 3px;
+        color: #073B4C;
+        border-radius: 3px;
+      }
+
 
       #root > header > div > div.calendar > div > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr > td > div > div > div > table > tbody > tr > td.fc-day > div > div.fc-daygrid-day-events > div> a > div > div.overlay > div > button:nth-child(12) {
         margin-top: 10px;

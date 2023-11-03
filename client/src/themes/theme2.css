@@ -14,7 +14,7 @@
     background-color: #E35734;
     margin-right: 15px;
     margin-left: 10px;
-    height: 500px;
+    height: 520px;
     border-radius: 15px;
     padding-left: 20px;
     padding-top: 10px;
@@ -65,6 +65,15 @@
 
       #root > header > div > div.calendar > div > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr > td > div > div > div > table > tbody > tr > td.fc-day > div > div.fc-daygrid-day-events > div> a > div > div.overlay > div > button:nth-child(12) {
         margin-top: 10px;
+      }
+
+      button {
+        background-color: #E35734;
+        border-color: transparent;
+        margin: 3px;
+        color: #264653;
+        border-radius: 3px;
+        font-family: 'Hind', sans-serif;
       }
 
       footer {

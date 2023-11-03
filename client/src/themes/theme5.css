@@ -49,6 +49,13 @@
         
       }
 
+      button {
+        background-color: #588157;
+        margin: 3px;
+        color: #344e41;
+        border-radius: 3px;
+      }
+
       #root > header > nav > a {
         font-family: 'Pixelify Sans', sans-serif;
         color: #588157;
