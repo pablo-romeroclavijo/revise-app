@@ -67,8 +67,13 @@
         font-family: 'Jost', sans-serif;
         color: #073B4C;
         border-radius: 10px;
-        margin: 10px;;
+        margin: 10px;
+        
       }
+      #root > header > nav > #logout{
+        margin-left: 1550px;;
+      }
+
 
       #root > header > div > div.calendar > div {
         height: 50%;
