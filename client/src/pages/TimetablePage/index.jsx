@@ -4,12 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const apiUrl = "https://revise-app.onrender.com"
 const TimetablePage = () => {
-  console.log("ok")
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const token = localStorage.getItem('token');
   
-  console.log("ok2",token)
   useEffect(() => {
     if (token === null) {
       navigate('/');
