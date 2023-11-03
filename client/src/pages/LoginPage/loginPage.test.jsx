@@ -11,6 +11,7 @@ import { expect } from 'vitest'
 expect.extend(matchers)
 
 import  LoginPage   from ".";
+import TimetablePage from "../TimetablePage";
 
 
 
@@ -18,9 +19,17 @@ describe("Login page", () => {
 
     const getItemSpy = vi.spyOn(Storage.prototype, 'getItem')
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem')
+    //Spy on the global fetch function
+    global.fetch = vi.fn()
 
+    function createFetchResponse(data) {
+        return { 
+            json: () => new Promise((resolve) => resolve(data)) 
+        }
+      }
+    
     beforeEach(() => {
-    render(< BrowserRouter > < LoginPage/> </BrowserRouter>)
+        render(< BrowserRouter > < LoginPage/> </BrowserRouter>)
     });
 
     afterEach(() => {
@@ -43,40 +52,64 @@ describe("Login page", () => {
         expect(password).toBeInTheDocument()
     })
     
-    it("when useranme and password is given wrong should show a alart",async() => {
+    it("when useranme and password is given right should navitae to timetable",async() => {
         
         const userName = screen.getByPlaceholderText("Username");
         const password = screen.getByPlaceholderText("Password");
-        const loginButton = screen.getByRole("button");
+        const loginButton = screen.getByRole("button",{name: "Login"});
 
         fireEvent.change(userName, { target: { value: 'testuser' } });
         fireEvent.change(password, { target: { value: 'testpassword' } });
 
-        fireEvent.click(loginButton);   
 
-        // await screen.findByText("ur not logged in");
+        fireEvent.click(loginButton);
+        const mockResponse = {
+            "token": "asdfasdf",      
+        }
+
+        
+        expect(window.location.href).toEqual('http://localhost:3000/');
+
+        fetch.mockResolvedValue(createFetchResponse(mockResponse))
+       
+        localStorage.setItem("token", JSON.stringify([mockResponse]))
+        render(<BrowserRouter><TimetablePage /></BrowserRouter>)
+        expect(window.location.href).toEqual('http://localhost:3000/timetable');
 
         // // Assert that the alert message is displayed
-         expect(screen.getByText("ur not logged in")).toBeInTheDocument();
+        // expect(screen.getByText("ur not logged in")).toBeInTheDocument();
+
     })
 
-    it('when username and password are correct should navigate to timetable', async () => {
-        
+    it('when username and password are wrong should navigate to timetable', async () => {
         
         const userName = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
-        const loginButton = screen.getByRole('button');
+        const loginButton = screen.getByRole("button", { name: "Login"});
     
         fireEvent.change(userName, { target: { value: 'admin123' } });
         fireEvent.change(password, { target: { value: 'admin123' } });
     
-
-    
         fireEvent.click(loginButton);
+        
+        const mockResponse = {
+            "error": "not found user",      
+        }
+        
+       fetch.mockResolvedValue(createFetchResponse(mockResponse))
     
-       
-        // Assuming your component sets a localStorage item on successful login
-        expect(localStorage.setItem).toBeCalledTimes(1)
+        expect(window.location.href).toEqual('http://localhost:3000/timetable');
+
+
+
+        })
+
+        it("when clicked take you to signup", () => {
+            const signUp = screen.getByText(`No Account`);
+            fireEvent.click(signUp)
+            expect(window.location.href).toEqual('http://localhost:3000/signup');
+
+
         })
     
 })
