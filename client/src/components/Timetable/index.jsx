@@ -369,9 +369,7 @@ const themes = {
   theme4: 'theme4',
   theme5: 'theme5'
 }
-
-
-
+//
 
 useEffect(() => {
   async function changeTheme() {
@@ -379,8 +377,7 @@ useEffect(() => {
     console.log(style);
 
     // Load the new theme
-
-    const themeImport = await import(`../../themes/${themes[theme]}.css?`);
+    const themeImport = await import(`../../themes/${themes[theme]}.css`);
   
     const styleElement = document.createElement('style');
     styleElement.setAttribute('data-theme-style', ''); // Add a data attribute
