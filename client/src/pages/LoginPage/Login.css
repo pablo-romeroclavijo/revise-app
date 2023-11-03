@@ -1,5 +1,6 @@
 :root { 
     background-color: #FCF8EB;
+    font-family: 'Hind', sans-serif;
 } 
 .login-container {
     display: flex;
@@ -12,9 +13,7 @@
     color: #073B4C;
     font-size: 40px;
     margin-bottom: 20px;
-    padding-left: 100px ;
-    padding-right: 100px ;
-    border-radius: 200px;
+    
 }
 
 .login-container input,.login-container button,.login-container a {

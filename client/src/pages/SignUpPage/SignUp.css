@@ -1,4 +1,8 @@
 /* Add a container for the signup form */
+:root { 
+    background-color: #FCF8EB;
+    font-family: 'Hind', sans-serif;
+} 
 .signup-container {
     display: flex;
     flex-direction: column;
@@ -7,7 +11,8 @@
 }
 
 .signup-container h1 {
-    font-size: 24px;
+    color: #073B4C;
+    font-size: 40px;
     margin-bottom: 20px;
 }
 
@@ -29,16 +34,17 @@
     /* background-color: #007bff; */
     color: #fff;
     border: none;
-    border-radius: 4px;
+    background-color: #E35734;
+    border-radius: 400px;   
     cursor: pointer;
 }
 
 .signup-container a {
     text-decoration: none;
-    /* color: #007bff; */
+     color: #007bff; 
     cursor: pointer; 
 }
 
 .signup-container button:hover,.signup-container a:hover {
-    /* background-color: #0056b3; */
+    background-color: #6E1802; 
 }
