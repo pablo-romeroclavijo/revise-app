@@ -38,7 +38,7 @@ const TimetablePage = () => {
 
   return (
     <>
-        {events.map(event => console.log(event))}
+        
         <h1>Your schedule for the day:</h1>
         <div className='event-card-container'>
           {!events ? <p>Loading...</p> : events.map(event => <EventCard event={event}/>)}

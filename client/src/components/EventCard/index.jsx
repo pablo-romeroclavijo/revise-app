@@ -12,7 +12,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
 
   const handleEdit = () => {
     const elements = document.querySelectorAll('.test');
-    const elementsEvents = document.querySelectorAll('element');
+    const elementsEvents = document.querySelectorAll('.fc-event');
     
     
 
@@ -21,7 +21,7 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
     });
 
     elementsEvents.forEach(element => {
-      element.classList.add('hideEvent');
+      element.classList.add('hideColour');
       });
 
     
@@ -46,9 +46,17 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
   function onCancel() {
     //document.body.style.backgroundColor = "#7F0909";
     const elements = document.querySelectorAll('.test');
+    const elementsEvents = document.querySelectorAll('.fc-event');
+
+
     elements.forEach(element => {
       element.classList.remove('hideEvent');
-      });
+    });
+
+    
+    elementsEvents.forEach(element => {
+      element.classList.remove('hideColour');
+    });
     setIsEditing(false);
     
     
@@ -57,8 +65,10 @@ const EventCard = ({ eventInfo, onDelete, onEdit, isUser }) => {
   const time = {hour: eventDate.getHours(), minute :eventDate.getMinutes()}
 
   return (
+    
     <div className='event-card'>
-      <div onClick={handleEdit} className='test' style={styles}>
+     
+      <div onClick={handleEdit} className='row' style={styles}>
         <h3>{time.hour}:{time.minute == 0 ? "00" : time.minute}</h3>
         <h3>{eventInfo.title}</h3>
         {/* <p>Subject: {eventInfo.extendedProps.subject}</p>

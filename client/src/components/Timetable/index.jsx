@@ -16,7 +16,7 @@ import '../../themes/required.css';
 
 
 function Timetable({linkCode}) {
-  console.log(linkCode);
+  //console.log(linkCode);
   const [events, setEvents] = useState([]);
   const [theme, setTheme] = useState('theme1')
   const subjectsDef = ['Maths', 'History', 'English', 'Science', 'Physics']
@@ -47,7 +47,7 @@ function Timetable({linkCode}) {
   }, [subjects]);
 
   useEffect(() => {
-    console.log('5',activeSubjects)
+    //console.log('5',activeSubjects)
     const filtered = events.filter(event=> activeSubjects.includes(event.subject))
     setFiltered(filtered)
   }, [activeSubjects]);
@@ -371,32 +371,53 @@ const themes = {
 }
 //
 
-useEffect( ()=>{
+useEffect(() => {
+  async function changeTheme() {
+    const style = document.querySelectorAll('style[data-theme-style]');
+    console.log(style);
+
+    // Load the new theme
+    const themeImport = await import(`../../themes/${themes[theme]}.css`);
   
-  const style = document.getElementsByTagName('style')
+    const styleElement = document.createElement('style');
+    styleElement.setAttribute('data-theme-style', ''); // Add a data attribute
+    styleElement.appendChild(document.createTextNode(themeImport.default));
 
-  // if(style[2]){
-  //   console.log(style[2])
-  //   style[2].remove()
-  //   console.log('style removed')}
+    // Remove the previous theme's style element, if it exists
+    if (style.length > 0) {
+      style[style.length - 1].remove();
+    }
 
-  async function changeTheme(){
-    await import (`../../themes/${themes[theme]}.css`)
-   
+    document.head.appendChild(styleElement);
   }
-  changeTheme()
-},[theme])
 
-useEffect(()=>{console.log(subjects)},[subjects])
+  changeTheme();
+}, [theme]);
 
+useEffect(()=>{},[subjects])
+//console.log(events)
+
+const linkInputRef = React.createRef();
+function copyToClipboard(){
+  linkInputRef.current.select();
+  document.execCommand('copy');
+};
 
   return (
     <div className='timetable-container'>
       <div className='side-bar'>
         <FilterTheme theme = {theme} setTheme = {setTheme}/>
         <FilterSubject subjects={subjects} setActive={setActive}/>
-        <button onClick={getShareLink}>Generate Share Link</button>
-        <input class="linkBox" type="text" value={link} readOnly style= {{width:"250px"}} />
+
+        {isUser && (<>
+          <button onClick={getShareLink}>Generate Share Link</button>
+          <input ref={linkInputRef} class="linkBox" type="text" value={link} readOnly style= {{width:"90%", marginRight:"20px"}} />
+          <button onClick={copyToClipboard}>Copy Link</button>
+          </>
+        )}
+        
+        
+
       </div>
       <div className="calendar">
 

@@ -7,11 +7,11 @@ function FilterSubject({subjects, setActive}){
     
         let activeSubjects = []
         for(let i of form){
-            console.log(i.checked)
+            //console.log(i.checked)
             if(i.checked)
             activeSubjects.push(i["value"])
         }
-        console.log(activeSubjects)
+        //console.log(activeSubjects)
         setActive(activeSubjects)
        
         

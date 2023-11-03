@@ -29,15 +29,67 @@
     height: 80vh !important;
     
 }
- 
+.event-card{
+   width: 100%;
+   border-radius: 10px;
+   padding-bottom: 5px;}
 
-.test {
+.row {
+   text-align: left;
+   padding: 10px;
+   padding-bottom: 0px;
+   display: flex;
+   justify-content: flex-start;
+   column-gap: 15px;
+   margin-bottom: 0px;
+   
+    }
+
+.row h3{
+   margin-top:0px
+}
+ 
+.fc-daygrid-day-frame {
+   display: flex;
+   flex-direction: column;
+   overflow-y: scroll;
+   overflow-x: hidden;
+   height: 150px;
+}
+
+#root > header > nav > a {
+   padding: 10px;
+ }
+
+/*scroll bar and whatnot*/
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: green;
+  border-radius: 3px; 
+}
+
+
+
+
+
+.fc-daygrid-event-harness a {
+   height: 40px;
+   margin-bottom: 5px;
     
  }
 
  .hideEvent {
     display: none !important;
-    background-color: rgba(0, 0, 0, 0.39) !important;
+    background-color: rgba(255, 0, 0, 0.39) !important;
+ }
+
+
+ .hideColour {
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: rgba(0, 0, 0, 0) !important;
  }
 
 
@@ -46,8 +98,16 @@
  }
 
  .linkBox {
-   width: 300px;
+   width: 100%;
+   overflow: hidden;
  }
+
+ .overlay {
+  color: black;
+ }
+
+ 
+
 
  
  /* body {

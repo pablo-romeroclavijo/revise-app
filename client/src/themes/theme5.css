@@ -7,14 +7,78 @@
 
   .side-bar{
     float:left;
+    margin-top: 65px;
     width: 15%;
     color: #344e41;
-    background-color: #588157;;
+    background-color: #b2ceb3;;
     margin-right: 15px;
+    margin-left: 10px;
     height: 500px;
     border-radius: 15px;
-    padding: 20px
+    padding-left: 20px;
+    padding-top: 10px;
+    }
 
+    .edit-popup {
+        position: absolute;
+        top: 50%; /* Adjust this value to center the popup vertically */
+        left: 50%; /* Adjust this value to center the popup horizontally */
+        transform: translate(-50%, -50%);
+        background: #fcf8eb !important;
+        z-index: 9999; /* Ensure it's on top of the overlay */
+        padding: 25px 50px 50px 50px;
+        display: flex;
+        flex-direction: column;
+        color: #344e41;
+        border-radius: 5px;
+        #eventTitle, #eventSubject{
+            border-color: rgb(7, 59, 76, 0.25);
+            border-width: 0.003cm;
+            border-radius: 1px;
+        }
+
+      }
+
+      #root > header > div > div.side-bar > button {
+        background-color: #588157;
+        border-color: transparent;
+        border-radius: 5px;
+      }
+
+      #root > header > div > div.side-bar > input {
+        
+      }
+
+      #root > header > nav > a {
+        font-family: 'Pixelify Sans', sans-serif;
+        color: #588157;
+        background-color: #b2ceb3;
+        border-radius: 10px;
+        margin: 10px;
+      }
+
+      #root > header > div > div.calendar > div > div> div > table > tbody > tr > td > div > div > div > table > tbody > tr > td.fc-day > div > div.fc-daygrid-day-events > div> a > div > div.overlay > div > button,
+      #root > header > div > div.calendar > div > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr.fc-scrollgrid-section.fc-scrollgrid-section-body.fc-scrollgrid-section-liquid > td > div > div > div > div.fc-timegrid-cols > table > tbody > tr > td.fc-day > div > div > div > a > div.fc-event-main > div > div.overlay > div > button
+      {
+        background-color: #588157;
+        margin: 3px;
+        color: #344e41;
+        border-radius: 3px;
+      }
+
+      #root > header > div > div.calendar > div > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr > td > div > div > div > table > tbody > tr > td.fc-day > div > div.fc-daygrid-day-events > div> a > div > div.overlay > div > button:nth-child(12) {
+        margin-top: 10px;
+      }
+
+      footer {
+        padding-top: 100px;
+        text-align: center;
+        font-family: 'Pixelify Sans', sans-serif;
+        color: #588157;
+    }
+    /* edit event card coloyr */
+    .fc-event {
+        background-color: #b2ceb3;
     }
 
   :root { 
